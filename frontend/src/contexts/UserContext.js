@@ -1,3 +1,19 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export default createContext({ accessToken: null, refreshToken: null });
+const UserContext = createContext();
+
+function useUserContext()
+{
+    return useContext(UserContext);
+}
+
+function UserContextProvider({ children })
+{
+    return (
+        <UserContext.Provider value = {{ accessToken: null, refreshToken: null }}>
+            {children}
+        </UserContext.Provider>
+    )
+}
+
+export { UserContextProvider, useUserContext };

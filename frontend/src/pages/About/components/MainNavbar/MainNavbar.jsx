@@ -1,12 +1,11 @@
 import { Typography } from "antd";
-import { useContext } from "react";
 import Logo from "../../../../components/Logo/Logo";
-import UserContext from "../../../../contexts/UserContext";
+import { useUserContext } from "../../../../contexts/UserContext";
 import Controls from "../Controls/Controls";
 import Navbar from "../Navbar/Navbar";
 
 export default function MainNavbar(props) {
-  const userContext = useContext(UserContext);
+  const { accessToken } = useUserContext();
 
   return (
     <Navbar>
@@ -34,7 +33,7 @@ export default function MainNavbar(props) {
           </Typography.Text>
         </Typography>
       </div>
-      {!userContext.accessToken ? <Controls /> : null}
+      {!accessToken ? <Controls /> : null}
     </Navbar>
   );
 }
