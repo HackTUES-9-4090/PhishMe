@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AttackDto } from './dto';
+import { AttackDto } from './dtos';
 import { AttackEntity } from './entities';
 
 @Injectable()
@@ -12,7 +12,8 @@ export class AttackService {
   ) {}
 
   async create(dto: AttackDto): Promise<AttackEntity> {
-    return await this.attacksRepository.save(dto);
+    const attack = this.attacksRepository.create(dto);
+    return await this.attacksRepository.save(attack);
   }
 
   async findAll(): Promise<AttackEntity[]> {
@@ -28,14 +29,15 @@ export class AttackService {
   }
 
   async update(id: number, dto: AttackDto): Promise<AttackEntity> {
-    const attack = await this.findOne(id);
-    return await this.attacksRepository.save({
-      ...attack,
+    const attack = this.attacksRepository.create({
+      id: id,
       ...dto,
     });
+
+    return await this.attacksRepository.save(attack);
   }
 
-  async delete(id: number) {
-    return await this.attacksRepository.delete(id);
+  async delete(id: number): Promise<void> {
+    await this.attacksRepository.delete(id);
   }
 }
