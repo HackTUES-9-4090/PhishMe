@@ -1,0 +1,24 @@
+.phishings
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 45px;
+    border-radius: 50%;
+    padding: 0px 10px 0px 10px;
+    font-size: 20px; 
+    margin: 20px
+}
+
+.userAttackContainer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    border-radius: 15px;
+    background: rgba(32, 82, 149, 0.4);
+    margin-bottom: 15px;
+}

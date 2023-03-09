@@ -1,4 +1,5 @@
 import {
+  IsUrl,
   IsEnum,
   IsString,
   IsNotEmpty,
@@ -26,6 +27,16 @@ export class AttackDto {
   @IsString()
   @IsNotEmpty()
   from: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  theme: string;
+
+  @ApiProperty()
+  @IsUrl()
+  @IsNotEmpty()
+  fakeUrl: string;
 
   @ApiProperty({ type: () => [AttackTargetDto] })
   @ValidateNested()
