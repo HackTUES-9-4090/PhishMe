@@ -1,0 +1,8 @@
+.MainNavbarProvder {
+  display: flex;
+  flex-direction: column;
+}
+
+.MainNavbarChildren {
+  padding-top: 34px;
+}

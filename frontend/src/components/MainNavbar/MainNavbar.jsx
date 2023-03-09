@@ -1,6 +1,6 @@
 import { Typography } from "antd";
-import Logo from "../../../../components/Logo/Logo";
-import { useUserContext } from "../../../../contexts/UserContext";
+import Logo from "../Logo/Logo";
+import { useUserContext } from "../../contexts/UserContext";
 import Controls from "../Controls/Controls";
 import Navbar from "../Navbar/Navbar";
 
