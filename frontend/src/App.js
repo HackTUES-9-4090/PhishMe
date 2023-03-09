@@ -1,10 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import AuthForm from "./components/AuthForm.component";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>4090</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/sign-in" element={<AuthForm title = {'Sign in'}/>} />
+        <Route path="/sign-up" element={<AuthForm title = {'Sign up'}/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
