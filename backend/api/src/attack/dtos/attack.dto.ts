@@ -7,8 +7,8 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { AttackTargetDto } from '@/attack/dto';
 import { CommunicationType } from '@/attack/enums';
+import { AttackTargetDto } from '.';
 
 export class AttackDto {
   @ApiProperty()

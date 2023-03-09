@@ -1,33 +1,13 @@
-import { BrowserRouter } from "react-router-dom";
-import { Route, Routes } from "react-router";
-import AuthForm from "./components/AuthForm.component";
-import { useContext } from "react";
-import UserContext from "./contexts/UserContext";
-import DashBoard from "./pages/DashBoard/DashBoard";
-import About from "./pages/About/About";
+import React from 'react';
+import Router from './components/Router.component';
+import { UserContextProvider } from './contexts/UserContext';
 
-function App() {
-  const userContext = useContext(UserContext);
-
+function App() 
+{
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          {!userContext.accessToken ? (
-            <>
-              (
-              <Route path="/sign-in" element={<AuthForm title={"Sign in"} />} />
-              <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />
-              )
-            </>
-          ) : null}
-          <Route
-            path="/"
-            element={userContext.accessToken ? <DashBoard /> : <About />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <UserContextProvider>
+      <Router/>
+    </UserContextProvider>
   );
 }
 
