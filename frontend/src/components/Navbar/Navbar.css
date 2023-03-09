@@ -4,4 +4,8 @@
   justify-content: space-between;
   height: 34px;
   padding: 10px;
+  position: fixed;
+  background-color: rgba(10, 38, 71, 0.9);
+  backdrop-filter: blur(200px);
+  z-index: 100;
 }
