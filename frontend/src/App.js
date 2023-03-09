@@ -1,10 +1,14 @@
+import SignIn from "./pages/signin/SignIn";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>4090</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/sign-in" element={<SignIn />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
