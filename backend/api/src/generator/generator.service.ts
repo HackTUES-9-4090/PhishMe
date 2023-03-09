@@ -56,7 +56,7 @@ export class GeneratorService {
     receiverMessages: Array<any>,
     messageType: string,
     theme: string,
-    relationShip: string,
+    relationship: string,
     sender: string,
     receiver: string,
     url: string,
@@ -65,6 +65,8 @@ export class GeneratorService {
     Use the context of the messages - ${receiverMessages}. Create a ${messageType} message with the writing style of ${sender} and persuade ${receiver} 
     to click on a link that is labeled as ${url}'.
     ${theme ? `The message has to pertain to a theme of ${theme}` : ''} ${
-      relationShip ? `. ${sender} is a ${relationShip} to ${receiver}` : ''
+      relationship
+        ? `. ${sender} is in a ${relationship} relationship to ${receiver}`
+        : ''
     }`;
 }
