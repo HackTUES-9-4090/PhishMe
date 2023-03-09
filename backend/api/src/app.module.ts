@@ -7,6 +7,8 @@ import { GeneratorModule } from './generator/generator.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmAsyncConfig } from '@/config/typeorm.config';
+import { UsersModule } from './users/users.module';
+import { OrganizationsModule } from './organizations/organizations.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { typeOrmAsyncConfig } from '@/config/typeorm.config';
     MailModule,
     TasksModule,
     GeneratorModule,
+    UsersModule,
+    OrganizationsModule,
   ],
   controllers: [],
   providers: [],

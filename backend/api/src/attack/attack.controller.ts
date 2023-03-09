@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AttackService } from './attack.service';
-import { AttackDto } from './dto';
+import { AttackDto } from './dtos';
 
 @ApiTags('Attack')
 @Controller('attack')
