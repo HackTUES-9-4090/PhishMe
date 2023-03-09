@@ -10,20 +10,24 @@ function App() {
   const userContext = useContext(UserContext);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {!userContext.accessToken ? (
-          <>
-            (<Route path="/sign-in" element={<AuthForm title={"Sign in"} />} />
-            <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />)
-          </>
-        ) : null}
-        <Route
-          path="/"
-          element={userContext.accessToken ? <DashBoard /> : <About />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          {!userContext.accessToken ? (
+            <>
+              (
+              <Route path="/sign-in" element={<AuthForm title={"Sign in"} />} />
+              <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />
+              )
+            </>
+          ) : null}
+          <Route
+            path="/"
+            element={userContext.accessToken ? <DashBoard /> : <About />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
