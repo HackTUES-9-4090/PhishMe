@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Configuration, OpenAIApi } from 'openai';
+import { EmailResponse } from './interfaces/response.interface';
 
 @Injectable()
 export class GeneratorService {
@@ -9,16 +10,20 @@ export class GeneratorService {
     }),
   );
 
-  public async generatePhishingEmail(data: any): Promise<string> {
+  public async generatePhishingEmail(data: any): Promise<EmailResponse> {
     const { messages, messageType, theme, relationShip } = data;
     const { sender, receiver, url } = data.config;
 
     if (!messages || !messageType || !theme || !relationShip) {
-      return 'Missing parameters';
+      return {
+        message: 'Missing parameters',
+        success: false,
+      };
     }
 
     const prompt = this.generatePrompt(
-      messages,
+      messages[0],
+      messages[1],
       messageType,
       theme,
       relationShip,
@@ -27,7 +32,12 @@ export class GeneratorService {
       url,
     );
 
-    return this.generateSolicitationText(prompt);
+    const res = await this.generateSolicitationText(prompt);
+
+    return {
+      message: res,
+      success: true,
+    };
   }
 
   generateSolicitationText = async (prompt: string) => {
@@ -36,13 +46,14 @@ export class GeneratorService {
         model: 'text-davinci-003',
         prompt,
         temperature: 0.8,
-        max_tokens: 100,
+        max_tokens: 250,
       })
     ).data.choices[0].text;
   };
 
   generatePrompt = (
-    messages: Array<any>,
+    senderMessages: Array<any>,
+    receiverMessages: Array<any>,
     messageType: string,
     theme: string,
     relationShip: string,
@@ -50,19 +61,10 @@ export class GeneratorService {
     receiver: string,
     url: string,
   ) =>
-    `${sender} would like to send ${receiver} a message. Use the writing of style of ${sender} and the information, present in these messages ${messages
-      .filter((message) => message.sender == sender)
-      .map(
-        (message) => message.text,
-      )}. Use the context of the messages ${receiver} has sent ${messages
-      .filter((message) => message.sender == receiver)
-      .map(
-        (message) => message.text,
-      )}.  Create a ${messageType} message with the writing style of ${sender} and persuade ${receiver} ${
-      url == 'link'
-        ? 'to click on a link that is labeled as LINK'
-        : `to give their own credentials to ${sender}`
-    }. ${theme ? `The message has to pertain to a theme of ${theme}` : ''} ${
+    `${sender} would like to send ${receiver} an email. Use the writing of style of ${sender} and the information, present in these messages ${senderMessages}. 
+    Use the context of the messages - ${receiverMessages}. Create a ${messageType} message with the writing style of ${sender} and persuade ${receiver} 
+    to click on a link that is labeled as ${url}'.
+    ${theme ? `The message has to pertain to a theme of ${theme}` : ''} ${
       relationShip ? `. ${sender} is a ${relationShip} to ${receiver}` : ''
     }`;
 }
