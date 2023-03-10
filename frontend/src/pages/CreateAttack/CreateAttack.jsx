@@ -201,135 +201,143 @@ export default function CreateAttack(props) {
                 />
               </Form.Item>
 
-              <Card style={{ background: "none" }} title="Targets">
-                {generateArray(count).map((_, index) => (
-                  <div key={index}>
-                    <Typography>
-                      <Typography.Title
-                        level={5}
-                        style={{ color: "white", marginTop: 20 }}
-                      >
-                        Target №{index + 1}
-                      </Typography.Title>
-                    </Typography>
-                    <Form.Item
-                      label={
-                        <label
-                          htmlFor={`email:target:${index}`}
-                          style={{ color: textColor }}
-                        >
-                          Email
-                        </label>
-                      }
-                      name={`email:target:${index}`}
-                      style={{ color: textColor }}
-                      rules={[
-                        {
-                          ...validationRules,
-                          message: "Please provide an email!",
-                          type: "email",
-                        },
-                      ]}
-                    >
-                      <Input type="email" id={`email:target:${index}`} />
-                    </Form.Item>
-                    <Form.Item
-                      label={
-                        <label
-                          htmlFor={`name:target:${index}`}
-                          style={{ color: textColor }}
-                        >
-                          Target Name
-                        </label>
-                      }
-                      name={`name:target:${index}`}
-                      rules={[
-                        {
-                          ...validationRules,
-                          message: "Please provide a name for the target!",
-                        },
-                      ]}
-                    >
-                      <Input
-                        name={`name:target:${index}`}
-                        id={`name:target:${index}`}
-                        type="text"
-                        style={{ minWidth: "20px" }}
-                      />
-                    </Form.Item>
-
-                    <Form.Item
-                      label={
-                        <label
-                          htmlFor={`fromMessages:target:${index}`}
-                          style={{ color: textColor }}
-                        >
-                          From Messages
-                        </label>
-                      }
-                      name={`fromMessages:target:${index}`}
-                      rules={[
-                        {
-                          ...validationRules,
-                          message: "Please provide some messages",
-                        },
-                      ]}
-                    >
-                      <Input.TextArea
-                        name={`fromMessages:target:${index}`}
-                        id={`fromMessages:target:${index}`}
-                        type="text"
-                        style={{ minWidth: "20px" }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label={
-                        <label
-                          htmlFor={`toMessages:target:${index}`}
-                          style={{ color: textColor }}
-                        >
-                          Outward Messages
-                        </label>
-                      }
-                      name={`toMessages:target:${index}`}
-                      rules={[
-                        {
-                          ...validationRules,
-                          message: "Please provide some messages",
-                        },
-                      ]}
-                    >
-                      <Input.TextArea
-                        name={`toMessages:target:${index}`}
-                        id={`toMessages:target:${index}`}
-                        type="text"
-                        style={{ minWidth: "20px" }}
-                      />
-                    </Form.Item>
-                  </div>
-                ))}
-
-                <Center>
-                  <Button onClick={incrementAttackCount} ghost={true}>
-                    Add Target
-                  </Button>
-                </Center>
-              </Card>
-
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className={styles.AlignItems}
-                  style={{
-                    marginTop: 10,
-                    padding: 20,
-                    backgroundColor: basicColor,
-                  }}
+              <Typography>
+                <Typography.Title
+                  level={4}
+                  style={{ color: "white", marginTop: 20 }}
                 >
-                  Create Attack
+                  Targets
+                </Typography.Title>
+              </Typography>
+
+              {generateArray(count).map((_, index) => (
+                <div key={index}>
+                  <Typography>
+                    <Typography.Title
+                      level={5}
+                      style={{ color: "white", marginTop: 20 }}
+                    >
+                      Target №{index + 1}
+                    </Typography.Title>
+                  </Typography>
+                  <Form.Item
+                    label={
+                      <label
+                        htmlFor={`email:target:${index}`}
+                        style={{ color: textColor }}
+                      >
+                        Email
+                      </label>
+                    }
+                    name={`email:target:${index}`}
+                    style={{ color: textColor }}
+                    rules={[
+                      {
+                        ...validationRules,
+                        message: "Please provide an email!",
+                        type: "email",
+                      },
+                    ]}
+                  >
+                    <Input type="email" id={`email:target:${index}`} />
+                  </Form.Item>
+                  <Form.Item
+                    label={
+                      <label
+                        htmlFor={`name:target:${index}`}
+                        style={{ color: textColor }}
+                      >
+                        Target Name
+                      </label>
+                    }
+                    name={`name:target:${index}`}
+                    rules={[
+                      {
+                        ...validationRules,
+                        message: "Please provide a name for the target!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      name={`name:target:${index}`}
+                      id={`name:target:${index}`}
+                      type="text"
+                      style={{ minWidth: "20px" }}
+                    />
+                  </Form.Item>
+
+                  <Form.Item
+                    label={
+                      <label
+                        htmlFor={`fromMessages:target:${index}`}
+                        style={{ color: textColor }}
+                      >
+                        From Messages
+                      </label>
+                    }
+                    name={`fromMessages:target:${index}`}
+                    rules={[
+                      {
+                        ...validationRules,
+                        message: "Please provide some messages",
+                      },
+                    ]}
+                  >
+                    <Input.TextArea
+                      name={`fromMessages:target:${index}`}
+                      id={`fromMessages:target:${index}`}
+                      type="text"
+                      style={{ minWidth: "20px" }}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label={
+                      <label
+                        htmlFor={`toMessages:target:${index}`}
+                        style={{ color: textColor }}
+                      >
+                        Outward Messages
+                      </label>
+                    }
+                    name={`toMessages:target:${index}`}
+                    rules={[
+                      {
+                        ...validationRules,
+                        message: "Please provide some messages",
+                      },
+                    ]}
+                  >
+                    <Input.TextArea
+                      name={`toMessages:target:${index}`}
+                      id={`toMessages:target:${index}`}
+                      type="text"
+                      style={{ minWidth: "20px" }}
+                    />
+                  </Form.Item>
+                </div>
+              ))}
+
+              <Center>
+                <Button onClick={incrementAttackCount} ghost={true}>
+                  Add Target
                 </Button>
-              </Form.Item>
+              </Center>
+              <Center>
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className={styles.AlignItems}
+                    style={{
+                      marginTop: 30,
+                      padding: 20,
+                      backgroundColor: basicColor,
+                    }}
+                  >
+                    Create Attack
+                  </Button>
+                </Form.Item>
+              </Center>
             </Form>
           </Center>
         </Card>
