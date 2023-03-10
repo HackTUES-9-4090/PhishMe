@@ -33,7 +33,7 @@ function AuthForm({ title, type }) {
     if (isSuccessful) {
       setUserState(data);
     } else {
-      setErrorState(errors);
+      setErrorState({ errors });
     }
 
     setLoadingState({ loading: false });

@@ -12,7 +12,7 @@ export default async function request(method, request, body, config = null) {
   } catch (err) {
     return {
       isSuccessful: false,
-      errors: err.config.data?.errors || [err.message],
+      errors: err.response.data?.message || [err.message],
     };
   }
 }
