@@ -17,6 +17,13 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('PhishMe')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+      },
+      'access-token',
+    )
+    .addBearerAuth({ type: 'http' }, 'refresh-token')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

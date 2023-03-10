@@ -1,19 +1,57 @@
-import React from 'react';
-import { textColor } from '../assets/Constants';
+import React, { useState }  from 'react';
+import { UpOutlined, DownOutlined } from '@ant-design/icons';
+import { textColor } from '../utils/Constants';
+import Text from './Text.component';
 import styles from './styles/UserAttacks.module.css';
+import GlobalStyles from '../utils/GlobalStyles.module.css';
+import UserAttacksDetails from '../pages/DashBoard/components/UserAttacksDetails.component';
 
-function UserAttacks({ employeeName, phishingsCount })
+function UserAttacks({ employeeName = 'Danail Yordanov', phishingsCount = 1 })
 {
+    const [seeMore, setSeeMore] = useState(false);
+
     return (
         <div className = {styles.userAttackContainer}>
-            <p style = {{ color: textColor, fontSize: 25 }}>{employeeName}</p>
+            <div className = {styles.userData}>
+                <Text text = {employeeName} fontSize = {25}/>
 
-            <div
-                className = {styles.phishings} 
-                style = {{ backgroundColor: phishingsCount > 0 ? '#F0706A' : '#88D453' }}
-            >
-                <p style = {{ color: textColor }}>{phishingsCount}</p>
+                <div
+                    className = {styles.phishings} 
+                    style = {{ backgroundColor: phishingsCount > 0 ? '#F0706A' : '#88D453' }}
+                >
+                    <Text text = {phishingsCount}/>
+                </div>
+
             </div>
+
+            {
+                seeMore && 
+                <UserAttacksDetails/>
+            }
+
+            <div className = {GlobalStyles.Center}>
+                <div className = {GlobalStyles.centeredRow}>
+                    <Text
+                        onClick = {() => setSeeMore(!seeMore)}
+                        text = {seeMore ? 'Close details' : 'Open details'}
+                    />
+
+                {
+                    seeMore
+                    ? 
+                    <UpOutlined  
+                        className = {GlobalStyles.sideText}
+                        style = {{ color: textColor }}
+                    />
+                    : 
+                    <DownOutlined 
+                        className = {GlobalStyles.sideText}
+                        style = {{ color: textColor }} 
+                    />
+                }
+                </div>
+            </div>
+
         </div>
     )
 }

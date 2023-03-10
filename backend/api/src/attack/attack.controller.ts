@@ -19,6 +19,8 @@ export class AttackController {
   @ApiBody({ type: AttackDto })
   @Post()
   async create(@Body() dto: AttackDto) {
+    await this.attackService.generateAndSendEmails(dto);
+
     return await this.attackService.create(dto);
   }
 

@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import Center from "../../components/Center";
-import { textColor } from "../../assets/Constants";
-import NavbarProvider from "../../hoc/NavbarProvider/NavbarProvider";
+import { textColor } from "../../utils/Constants";
+import NavbarProvider from "../../hoc/NavbarProvider";
 
 export default function PageNotFound() {
   return (

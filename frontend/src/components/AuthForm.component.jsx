@@ -1,15 +1,45 @@
 import React from "react";
 import { Button, Form, Input, Typography } from "antd";
-import NavbarProvider from "../hoc/NavbarProvider/NavbarProvider";
-import { basicColor, textColor } from "../assets/Constants";
+import NavbarProvider from "../hoc/NavbarProvider";
+import { basicColor, textColor } from "../utils/Constants";
 import Center from "./Center";
-import styles from "../assets/GlobalStyles.module.css";
+import styles from "../utils/GlobalStyles.module.css";
+import Loading from "./Loading";
+import request from "../utils/requests";
+import { useAppContext } from "../contexts/ContextProvider";
 
 const validationsRules = { required: true, warningOnly: true };
 const inputWidth = 400;
 
-function AuthForm({ title }) {
-  return (
+function AuthForm({ title, type }) {
+  const {
+    user: { setUserState },
+    error: { setErrorState },
+    loading: {
+      loadingState: { loading },
+      setLoadingState,
+    },
+  } = useAppContext();
+
+  async function handleFormSubmission({ email, password }) {
+    setLoadingState({ loading: true });
+    setErrorState({ errors: [] });
+    const { isSuccessful, errors, data } = await request(
+      "post",
+      `/auth/${type}`,
+      { email, password }
+    );
+
+    if (isSuccessful) {
+      setUserState(data);
+    } else {
+      setErrorState(errors);
+    }
+
+    setLoadingState({ loading: false });
+  }
+
+  const form = (
     <NavbarProvider>
       <Center>
         <div>
@@ -25,7 +55,7 @@ function AuthForm({ title }) {
             wrapperCol={{ span: 20 }}
             style={{ maxWidth: 500 }}
             initialValues={{ remember: true }}
-            onFinish={null}
+            onFinish={handleFormSubmission}
             autoComplete="off"
           >
             <Form.Item
@@ -72,6 +102,8 @@ function AuthForm({ title }) {
       </Center>
     </NavbarProvider>
   );
+
+  return <>{loading ? <Loading /> : form}</>;
 }
 
 export default AuthForm;

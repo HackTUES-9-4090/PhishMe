@@ -1,4 +1,4 @@
-import "./Navbar.css";
+import "./styles/Navbar.css";
 
 export default function Navbar({ children }) {
   return <div className="Navbar">{children}</div>;

@@ -1,4 +1,4 @@
-import NavbarProvider from "../../hoc/NavbarProvider/NavbarProvider";
+import NavbarProvider from "../../hoc/NavbarProvider";
 
 export default function About(props) {
   return (

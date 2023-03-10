@@ -1,4 +1,4 @@
-import styles from '../assets/GlobalStyles.module.css';
+import styles from '../utils/GlobalStyles.module.css';
 
 function Center(props) 
 {
