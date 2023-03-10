@@ -10,14 +10,18 @@ import re
 from os import mkdir, path
 import codecs
 
-if(len(argv) < 2):
+if(len(argv) < 3):
+    print("Usage ", argv[0], " <URL> <FILENAME>")
     exit()
 
-dep = open('dependencies.txt', 'w+')
-if(not(path.exists('app'))):
-    mkdir('app')
 URL = argv[1]
 PARSED_URL = urlparse(URL)
+FILENAME = argv[2]
+
+
+dep = open('dependencies.txt', 'w+')
+if(not(path.exists(FILENAME))):
+    mkdir(FILENAME)
 
 
 class IndexingParser(HTMLParser):
@@ -34,7 +38,7 @@ class IndexingParser(HTMLParser):
                         return
                     url_id = PARSED_URL.scheme + "://" + PARSED_URL.netloc + (PARSED_URL.path if val[0] != '/' else '') + val
                     print(url_id)
-                    dep.write("app/" + val + "\n") 
+                    dep.write(FILENAME + '/' + val + "\n") 
                     subprocess.run(["node", "./main_downloader.js", url_id, "." + val])
 
 
@@ -68,8 +72,8 @@ def main():
         url_id = PARSED_URL.scheme + "://" + PARSED_URL.netloc + (PARSED_URL.path if val[0] != '/' else '') + val
         print(url_id)
         val = re.sub(r'\?.*', '', val)
-        dep.write("app/" + val + "\n") 
-        subprocess.run(["node", "./main_downloader.js", url_id, val])
+        dep.write(FILENAME + '/' + val + "\n") 
+        subprocess.run(["node", "./main_downloader.js", url_id, val, FILENAME])
 
 main()
 
@@ -81,5 +85,5 @@ replaced_source = re.sub(r'href="(.*?)(?:\?.*?"|")', r'href="\1"', replaced_sour
 #replaced_source = re.sub('link rel="prefetch" as="script" href=', 'script src=', replaced_source)
 #replaced_source = re.sub('href="')
 #print(replaced_source)
-with codecs.open('app/index.html', 'w+', 'utf-8') as f:
+with codecs.open(FILENAME + '/' + FILENAME + '.html', 'w+', 'utf-8') as f:
     f.write(replaced_source)
