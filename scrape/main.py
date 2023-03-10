@@ -53,9 +53,20 @@ WebDriverWait(driver, timeout=10).until(document_initialised)
 #index.feed(driver.page_source)
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 for tag in soup.find_all(['script', 'link', 'img']):
-    if(tag.href):
-        
+    print(tag.name)
 
+    if (tag.get('href')):
+        val = tag['href']
+    elif (tag.get('src')):
+        val = tag['src']
+    parsed_val = urlparse(val)
+    print(val)
+    if(parsed_val.scheme):
+        exit
+    url_id = PARSED_URL.scheme + "://" + PARSED_URL.netloc + (PARSED_URL.path if val[0] != '/' else '') + val
+    print(url_id)
+    dep.write("app/" + val + "\n") 
+    subprocess.run(["node", "./main_downloader.js", url_id, "." + val])
 
 replaced_source = re.sub('href="/', 'href="', driver.page_source)
 replaced_source = re.sub('src="/', 'src="', replaced_source)
