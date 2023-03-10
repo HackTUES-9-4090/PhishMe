@@ -11,16 +11,17 @@ export class MailService {
   private readonly logger = new Logger(MailService.name);
 
   async sendEmail(emailContext: EmailContext): Promise<EmailResponse> {
-    const { receiverEmail, senderEmail, subject, text, html } = emailContext;
+    const { receiverEmail, senderEmail, subject, text } = emailContext;
 
     this.logger.log(`Sending email to ${receiverEmail}`);
+
+    const htmlFormatted = text.replace(/\n/g, '<br>');
 
     this.mailerService.sendMail({
       to: receiverEmail,
       from: senderEmail,
       subject,
-      // text,
-      html: text,
+      html: htmlFormatted,
     });
 
     return {
