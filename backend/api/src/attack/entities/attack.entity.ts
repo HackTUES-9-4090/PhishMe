@@ -6,15 +6,40 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CommunicationType } from '@/attack/enums';
 import { AttackTargetEntity } from './attack-target.entity';
+import { Options } from '@nestjs/common';
 
 @Entity('attack')
 export class AttackEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
+
+  @Column({
+    type: 'enum',
+    enum: CommunicationType,
+  })
+  communicationType: CommunicationType;
+
+  @Column()
+  fromName: string;
+
+  @Column()
+  fromRelationship: string;
+
+  @Column()
+  theme: string;
+
+  @Column({ nullable: true })
+  scrapeUrl?: string;
+
+  @Column({
+    nullable: true,
+  })
+  generatedEmailContent?: string;
 
   @OneToMany(() => AttackTargetEntity, (target) => target.attack, {
     eager: true,

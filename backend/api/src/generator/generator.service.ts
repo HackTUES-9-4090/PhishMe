@@ -21,11 +21,17 @@ export class GeneratorService {
   private readonly logger = new Logger(GeneratorService.name);
 
   public async generatePhishingEmail(data: EmailData): Promise<EmailResponse> {
+    this.logger.log('Generating phishing email');
+
+    if (!data.attack.scrapeUrl) {
+      this.logger.log('No url present');
+    }
+
     const {
       communicationType: messageType,
-      from: sender,
+      fromName: sender,
       theme,
-      fakeUrl: url,
+      scrapeUrl: url,
     } = data.attack;
 
     const relationShip = 'friend';
@@ -45,7 +51,7 @@ export class GeneratorService {
 
     const res = await this.generateSolicitationText(prompt);
 
-    this.logger.log('Generated phishing email: ' + res);
+    // this.logger.log('Generated phishing email: ' + res);
 
     return {
       message: res,
@@ -76,7 +82,11 @@ export class GeneratorService {
   ) =>
     `${sender} would like to send ${receiver} an email. Use the writing of style of ${sender} and the information, present in these messages ${senderMessages}. 
     Use the context of the messages - ${receiverMessages}. Create a ${messageType} message with the writing style of ${sender} and persuade ${receiver} 
-    to click on a link that is labeled as ${url}'.
+    ${
+      url
+        ? `to click on a link that is labeled as ${url}`
+        : `To send login credentials for something related to the theme.`
+    }'.
     ${theme ? `The message has to pertain to a theme of ${theme}` : ''} ${
       relationship
         ? `. ${sender} is in a ${relationship} relationship to ${receiver}`

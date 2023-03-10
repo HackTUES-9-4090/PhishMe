@@ -13,13 +13,13 @@ function UserAttacks({ employeeName = 'Danail Yordanov', phishingsCount = 1 })
     return (
         <div className = {styles.userAttackContainer}>
             <div className = {styles.userData}>
-                <Text text = {employeeName} fontSize = {25}/>
+                <Text text = {employeeName} style = {{ fontSize: 25 }}/>
 
                 <div
                     className = {styles.phishings} 
                     style = {{ backgroundColor: phishingsCount > 0 ? '#F0706A' : '#88D453' }}
                 >
-                    <Text text = {phishingsCount}/>
+                    <Text text = {phishingsCount} />
                 </div>
 
             </div>
@@ -34,6 +34,7 @@ function UserAttacks({ employeeName = 'Danail Yordanov', phishingsCount = 1 })
                     <Text
                         onClick = {() => setSeeMore(!seeMore)}
                         text = {seeMore ? 'Close details' : 'Open details'}
+                        style = {{ fontSize: 17 }}
                     />
 
                 {
