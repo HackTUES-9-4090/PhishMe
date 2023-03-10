@@ -7,7 +7,7 @@ export default async function request(method, request, body, config = null) {
   try {
     return {
       isSuccessful: true,
-      data: await instance[method](request, body, config),
+      data: (await instance[method](request, body, config)).data,
     };
   } catch (err) {
     return {
