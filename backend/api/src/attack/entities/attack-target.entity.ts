@@ -12,6 +12,11 @@ export class AttackTargetEntity {
   @Column()
   email: string;
 
+  @Column({
+    nullable: true,
+  })
+  generatedEmailContent?: string;
+
   @Column({ type: 'boolean', default: false })
   isFailedClick: boolean;
 

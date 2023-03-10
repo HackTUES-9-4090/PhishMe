@@ -32,9 +32,8 @@ export class GeneratorService {
       fromName: sender,
       theme,
       scrapeUrl: url,
+      fromRelationship: relationShip,
     } = data.attack;
-
-    const relationShip = 'friend';
 
     const { name: receiver, fromMessages, toMessages } = data.target;
 
