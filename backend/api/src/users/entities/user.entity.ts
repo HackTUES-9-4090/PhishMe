@@ -11,7 +11,6 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OrganizationEntity } from '@/organizations/entities';
 
 @Entity('user')
 export class UserEntity {
@@ -29,12 +28,6 @@ export class UserEntity {
     nullable: true,
   })
   refreshToken?: string;
-
-  @ManyToOne(() => OrganizationEntity, (organization) => organization.users, {
-    nullable: true,
-    onDelete: 'SET NULL',
-  })
-  organization: OrganizationEntity;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
