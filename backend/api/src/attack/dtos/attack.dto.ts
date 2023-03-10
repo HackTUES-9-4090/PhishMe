@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   ArrayNotEmpty,
   ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { CommunicationType } from '@/attack/enums';
@@ -41,8 +42,8 @@ export class AttackDto {
 
   @ApiProperty()
   @IsUrl()
-  @IsNotEmpty()
-  scrapeUrl: string;
+  @IsOptional()
+  scrapeUrl?: string;
 
   @ApiProperty({ type: () => [AttackTargetDto] })
   @Type(() => AttackTargetDto)

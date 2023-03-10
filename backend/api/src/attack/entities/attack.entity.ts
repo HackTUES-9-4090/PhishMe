@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { CommunicationType } from '@/attack/enums';
 import { AttackTargetEntity } from './attack-target.entity';
+import { Options } from '@nestjs/common';
 
 @Entity('attack')
 export class AttackEntity {
@@ -32,8 +33,8 @@ export class AttackEntity {
   @Column()
   theme: string;
 
-  @Column()
-  scrapeUrl: string;
+  @Column({ nullable: true })
+  scrapeUrl?: string;
 
   @Column({
     nullable: true,
