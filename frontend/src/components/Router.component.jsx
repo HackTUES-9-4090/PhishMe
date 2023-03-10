@@ -26,7 +26,7 @@ function Router() {
             />
             <Route
               path="/sign-up"
-              element={<AuthForm type="signin" title={"Sign up"} />}
+              element={<AuthForm type="signup" title={"Sign up"} />}
             />
           </>
         ) : null}
