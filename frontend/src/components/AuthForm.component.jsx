@@ -33,8 +33,6 @@ function AuthForm({ title, type }) {
       { email, password }
     );
 
-    console.log(data);
-
     if (isSuccessful) {
       setUserState(data);
       window.localStorage.setItem("accessToken", data.accessToken);

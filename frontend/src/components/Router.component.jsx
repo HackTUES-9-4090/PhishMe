@@ -14,7 +14,7 @@ function Router() {
       userState: { accessToken },
     },
   } = useAppContext();
-
+  console.log(accessToken);
   return (
     <BrowserRouter>
       <Routes>

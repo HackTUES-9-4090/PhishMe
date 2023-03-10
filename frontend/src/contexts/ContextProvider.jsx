@@ -12,13 +12,9 @@ function ContextProvider({ children }) {
     refreshToken: window.localStorage.getItem("refreshToken"),
   });
 
-  const [loadingState, setLoadingState] = useState({
-    loading: false,
-  });
+  const [loadingState, setLoadingState] = useState({ loading: false });
 
-  const [errorState, setErrorState] = useState({
-    errors: [],
-  });
+  const [errorState, setErrorState] = useState({ errors: [] });
 
   return (
     <Context.Provider
