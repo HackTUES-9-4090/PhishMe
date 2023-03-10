@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { MailService } from './mail.service';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { EmailResponse } from './interfaces/response.interface';
@@ -20,5 +20,10 @@ export class MailController {
     }
 
     return await this.mailService.sendEmail(dto);
+  }
+
+  @Post('send/:attackId')
+  async sendEmailByAttack(@Param('attackId') attackId: string) {
+    return await this.mailService.sendEmailByAttack(attackId);
   }
 }

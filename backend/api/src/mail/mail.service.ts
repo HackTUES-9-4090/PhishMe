@@ -3,15 +3,19 @@ import { EmailContext } from './interfaces/emailcontext.interface';
 import { EmailResponse } from './interfaces/response.interface';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Logger } from '@nestjs/common';
+import { AttackService } from '@/attack/attack.service';
 
 @Injectable()
 export class MailService {
-  constructor(private readonly mailerService: MailerService) {}
+  constructor(
+    private readonly mailerService: MailerService,
+    private readonly attackService: AttackService,
+  ) {}
 
   private readonly logger = new Logger(MailService.name);
 
   async sendEmail(emailContext: EmailContext): Promise<EmailResponse> {
-    const { receiverEmail, senderEmail, subject, text } = emailContext;
+    const { receiverEmail, subject, text } = emailContext;
 
     this.logger.log(`Sending email to ${receiverEmail}`);
 
@@ -19,7 +23,7 @@ export class MailService {
 
     this.mailerService.sendMail({
       to: receiverEmail,
-      from: senderEmail,
+      from: 'noreply @ tuesplace <noreply@tuesplace.com>',
       subject,
       html: htmlFormatted,
     });
@@ -27,5 +31,22 @@ export class MailService {
     return {
       success: true,
     };
+  }
+
+  async sendEmailByAttack(attackId: string) {
+    const attack = await this.attackService.findOne(attackId);
+
+    for (const target of attack.targets) {
+      const emailContext = {
+        receiverEmail: target.email,
+        subject: `${target.name}, It's ${attack.fromName}`,
+        text: target.generatedEmailContent,
+        html: target.generatedEmailContent,
+      };
+
+      await this.sendEmail(emailContext);
+    }
+
+    return attackId;
   }
 }
