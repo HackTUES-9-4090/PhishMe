@@ -1,24 +1,25 @@
-import { useAppContext } from '../contexts/ContextProvider';
-import request from '../utils/requests';
+import { useAppContext } from "../contexts/ContextProvider";
+import request from "../utils/requests";
 
-function useFetch()
-{
-    const { loading: { setLoadingState }, error: { setErrorState } } = useAppContext();
+function useFetch() {
+	const {
+		loading: { setLoadingState },
+		error: { setErrorState },
+	} = useAppContext();
 
-    async function fetchData(method, url, body)
-    {
-        setLoadingState(true);
+	async function fetchData(method, url, body) {
+		setLoadingState(true);
 
-        const { isSuccessful, errors, data } = await request(method, url, body);
+		const { isSuccessful, errors, data } = await request(method, url, body);
 
-        setLoadingState(true);
+		setLoadingState(true);
 
-        if (isSuccessful) return data;
+		if (isSuccessful) return data;
 
-        setErrorState({ errors });
-    }
+		setErrorState({ errors });
+	}
 
-    return { fetchData }
+	return { fetchData };
 }
 
 export default useFetch;
