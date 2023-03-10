@@ -1,6 +1,14 @@
+import { AttackDto } from '@/attack/dtos';
 import { Injectable } from '@nestjs/common';
 import { Configuration, OpenAIApi } from 'openai';
 import { EmailResponse } from './interfaces/response.interface';
+import { AttackTargetDto } from '@/attack/dtos';
+import { Logger } from '@nestjs/common';
+
+interface EmailData {
+  attack: AttackDto;
+  target: AttackTargetDto;
+}
 
 @Injectable()
 export class GeneratorService {
@@ -10,20 +18,23 @@ export class GeneratorService {
     }),
   );
 
-  public async generatePhishingEmail(data: any): Promise<EmailResponse> {
-    const { messages, messageType, theme, relationShip } = data;
-    const { sender, receiver, url } = data.config;
+  private readonly logger = new Logger(GeneratorService.name);
 
-    if (!messages || !messageType || !theme || !relationShip) {
-      return {
-        message: 'Missing parameters',
-        success: false,
-      };
-    }
+  public async generatePhishingEmail(data: EmailData): Promise<EmailResponse> {
+    const {
+      communicationType: messageType,
+      from: sender,
+      theme,
+      fakeUrl: url,
+    } = data.attack;
+
+    const relationShip = 'friend';
+
+    const { name: receiver, fromMessages, toMessages } = data.target;
 
     const prompt = this.generatePrompt(
-      messages[0],
-      messages[1],
+      fromMessages,
+      toMessages,
       messageType,
       theme,
       relationShip,
@@ -33,6 +44,8 @@ export class GeneratorService {
     );
 
     const res = await this.generateSolicitationText(prompt);
+
+    this.logger.log('Generated phishing email: ' + res);
 
     return {
       message: res,
