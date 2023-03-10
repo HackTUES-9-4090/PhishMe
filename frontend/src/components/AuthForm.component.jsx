@@ -7,6 +7,7 @@ import styles from "../utils/GlobalStyles.module.css";
 import Loading from "./Loading";
 import request from "../utils/requests";
 import { useAppContext } from "../contexts/ContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const validationsRules = { required: true, warningOnly: true };
 const inputWidth = 400;
@@ -21,6 +22,8 @@ function AuthForm({ title, type }) {
     },
   } = useAppContext();
 
+  const navigate = useNavigate();
+
   async function handleFormSubmission({ email, password }) {
     setLoadingState({ loading: true });
     setErrorState({ errors: [] });
@@ -30,8 +33,13 @@ function AuthForm({ title, type }) {
       { email, password }
     );
 
+    console.log(data);
+
     if (isSuccessful) {
       setUserState(data);
+      window.localStorage.setItem("accessToken", data.accessToken);
+      window.localStorage.setItem("refreshToken", data.refreshToken);
+      navigate("/");
     } else {
       setErrorState({ errors });
     }
