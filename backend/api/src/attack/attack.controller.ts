@@ -8,8 +8,8 @@ import {
   Controller,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { AttackService } from './attack.service';
 import { AttackDto } from './dtos';
+import { AttackService } from './attack.service';
 
 @ApiTags('Attack')
 @Controller('attack')
@@ -31,17 +31,17 @@ export class AttackController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.attackService.findOne(+id);
+    return await this.attackService.findOne(id);
   }
 
   @ApiBody({ type: AttackDto })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() dto: AttackDto) {
-    return await this.attackService.update(+id, dto);
+    return await this.attackService.update(id, dto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return await this.attackService.delete(+id);
+    return await this.attackService.delete(id);
   }
 }

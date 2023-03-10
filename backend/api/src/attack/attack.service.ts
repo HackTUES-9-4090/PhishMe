@@ -52,7 +52,7 @@ export class AttackService {
     return await this.attacksRepository.find();
   }
 
-  async findOne(id: number): Promise<AttackEntity> {
+  async findOne(id: string): Promise<AttackEntity> {
     return await this.attacksRepository.findOne({
       where: {
         id: id,
@@ -60,7 +60,7 @@ export class AttackService {
     });
   }
 
-  async update(id: number, dto: AttackDto): Promise<AttackEntity> {
+  async update(id: string, dto: AttackDto): Promise<AttackEntity> {
     const attack = this.attacksRepository.create({
       id: id,
       ...dto,
@@ -69,7 +69,7 @@ export class AttackService {
     return await this.attacksRepository.save(attack);
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.attacksRepository.delete(id);
   }
 }

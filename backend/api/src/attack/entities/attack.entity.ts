@@ -12,8 +12,8 @@ import { Options } from '@nestjs/common';
 
 @Entity('attack')
 export class AttackEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
