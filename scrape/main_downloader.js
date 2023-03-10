@@ -9,7 +9,8 @@ function main() {
 	const fs = require('fs')
 	const url = process.argv[2]
 	const filename = process.argv[3]
-	const DIR = process.argv[4] + '/'
+	const DIR = process.argv[4]
+
 	let cdir = DIR + path.parse(filename).dir
 	if(cdir.length > DIR.length && !fs.existsSync(cdir)) {
 		console.log("CREATING DIR " + cdir)
