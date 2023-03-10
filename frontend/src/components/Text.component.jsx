@@ -1,11 +1,11 @@
 import React from 'react';
 import { textColor } from '../utils/Constants';
 
-function Text({ text, fontSize, onClick })
+function Text({ text, onClick, style })
 {
     return (
         <p 
-            style = {{ color: textColor, fontSize }}
+            style = {{ color: textColor, ...style }}
             {...{ onClick }}
         >
             {text}

@@ -15,17 +15,15 @@ function UserAttacksDetails({ attackName = 'Car phishing email', communcationTyp
                     <Text text = {'Communication type: ' + communcationType}/>
                 </div>
 
-                <div 
-                    style = {{ justifyContent: 'space-between', width: '25%'}}
-                    className = {GlobalStyles.centeredRow}
-                >
+                <div className = {GlobalStyles.centeredRow}>
                 {
                     success 
                     ? <CheckOutlined style = {{ fontSize: 35, color: 'green' }}/>
                     : <CloseOutlined style = {{ fontSize: 35, color: 'red' }} />
                 }
-
-                <Text text = {success ? 'Passed' : 'Failed'} fontSize = {20}/>
+                <div className = {GlobalStyles.sideText}>
+                    <Text text = {success ? 'Passed' : 'Failed'} fontSize = {17}/>
+                </div>
                 </div> 
             </div>
 
