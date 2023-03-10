@@ -35,6 +35,11 @@ export class AttackEntity {
   @Column()
   scrapeUrl: string;
 
+  @Column({
+    nullable: true,
+  })
+  generatedEmailContent?: string;
+
   @OneToMany(() => AttackTargetEntity, (target) => target.attack, {
     eager: true,
     cascade: true,
