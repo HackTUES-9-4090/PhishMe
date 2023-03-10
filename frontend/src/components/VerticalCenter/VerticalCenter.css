@@ -1,0 +1,4 @@
+.VerticalCenter {
+  display: flex;
+  align-self: center;
+}

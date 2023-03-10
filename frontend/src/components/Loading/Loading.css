@@ -1,0 +1,22 @@
+.LoadingWrapper {
+  height: 100vh;
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: #0a2647;
+  justify-content: center;
+}
+
+.Loading {
+  animation: spin 0.7s ease-in-out infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

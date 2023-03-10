@@ -1,13 +1,15 @@
-import React from 'react';
-import Router from './components/Router.component';
-import { UserContextProvider } from './contexts/UserContext';
+import React from "react";
+import Router from "./components/Router.component";
+import { ContextProvider } from "./contexts/ContextProvider";
+import MetaProvider from "./hoc/MetaProvider/MetaProvider";
 
-function App() 
-{
+function App() {
   return (
-    <UserContextProvider>
-      <Router/>
-    </UserContextProvider>
+    <ContextProvider>
+      <MetaProvider>
+        <Router />
+      </MetaProvider>
+    </ContextProvider>
   );
 }
 

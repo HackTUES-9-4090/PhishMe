@@ -1,11 +1,15 @@
 import { Typography } from "antd";
 import Logo from "../Logo/Logo";
-import { useUserContext } from "../../contexts/UserContext";
+import { useAppContext } from "../../contexts/ContextProvider";
 import Controls from "../Controls/Controls";
 import Navbar from "../Navbar/Navbar";
 
 export default function MainNavbar(props) {
-  const { accessToken } = useUserContext();
+  const {
+    user: {
+      userState: { accessToken },
+    },
+  } = useAppContext();
 
   return (
     <Navbar>
