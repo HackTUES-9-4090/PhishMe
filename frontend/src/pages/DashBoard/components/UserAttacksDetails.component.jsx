@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from '../../../components/Text.component';
 import styles from '../styles/UserAttacksDetails.module.css';
-import GlobalStyles from '../../../assets/GlobalStyles.module.css';
+import GlobalStyles from '../../../utils/GlobalStyles.module.css';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 

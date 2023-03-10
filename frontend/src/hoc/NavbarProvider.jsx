@@ -1,5 +1,5 @@
-import MainNavbar from "../../components/MainNavbar/MainNavbar";
-import "./NavbarProvider.css";
+import MainNavbar from "../components/MainNavbar";
+import "./styles/NavbarProvider.css";
 
 export default function NavbarProvider(props) {
   return (

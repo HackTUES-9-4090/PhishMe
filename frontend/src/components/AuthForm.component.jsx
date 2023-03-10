@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Form, Input, Typography } from "antd";
-import NavbarProvider from "../hoc/NavbarProvider/NavbarProvider";
-import { basicColor, textColor } from "../assets/Constants";
+import NavbarProvider from "../hoc/NavbarProvider";
+import { basicColor, textColor } from "../utils/Constants";
 import Center from "./Center";
-import styles from "../assets/GlobalStyles.module.css";
-import Loading from "./Loading/Loading";
+import styles from "../utils/GlobalStyles.module.css";
+import Loading from "./Loading";
 import request from "../utils/requests";
 import { useAppContext } from "../contexts/ContextProvider";
 

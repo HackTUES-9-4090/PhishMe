@@ -1,6 +1,6 @@
 import { List, Typography } from "antd";
-import Center from "../Center";
-import "./Errors.css";
+import Center from "./Center";
+import "./styles/Errors.css";
 
 export default function Errors({ errors }) {
   return (

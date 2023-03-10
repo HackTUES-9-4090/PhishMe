@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "./components/Router.component";
 import { ContextProvider } from "./contexts/ContextProvider";
-import MetaProvider from "./hoc/MetaProvider/MetaProvider";
+import MetaProvider from "./hoc/MetaProvider";
 
 function App() {
   return (

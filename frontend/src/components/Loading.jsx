@@ -1,7 +1,7 @@
-import Center from "../Center";
-import Logo from "../Logo/Logo";
-import VerticalCenter from "../VerticalCenter/VerticalCenter";
-import "./Loading.css";
+import Center from "./Center";
+import Logo from "./Logo";
+import VerticalCenter from "./VerticalCenter";
+import "./styles/Loading.css";
 
 export default function Loading() {
   return (

@@ -21,7 +21,7 @@ function Router() {
             <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />
           </>
         ) : null}
-        <Route path="/" element={accessToken ? <DashBoard /> : <About />} />
+        <Route path="/" element={!accessToken ? <DashBoard /> : <About />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

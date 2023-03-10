@@ -12,4 +12,9 @@
     flex-direction: row;
     align-items: center; 
 }
+
+.sideText
+{
+    margin-left: 10px
+}
   

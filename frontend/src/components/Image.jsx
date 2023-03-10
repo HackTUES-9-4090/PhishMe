@@ -1,4 +1,4 @@
-import "./Image.css";
+import "./styles/Image.css";
 
 export default function Image({ src, alt, size }) {
   return (

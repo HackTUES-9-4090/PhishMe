@@ -1,7 +1,7 @@
 import Center from "../../components/Center";
-import { textColor } from "../../assets/Constants";
+import { textColor } from "../../utils/Constants";
 import UserAttacks from "../../components/UserAttacks.component";
-import NavbarProvider from "../../hoc/NavbarProvider/NavbarProvider";
+import NavbarProvider from "../../hoc/NavbarProvider";
 
 export default function DashBoard({ companyName }) {
   return (

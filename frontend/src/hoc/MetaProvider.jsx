@@ -1,6 +1,6 @@
-import Errors from "../../components/Errors/Errors";
-import Loading from "../../components/Loading/Loading";
-import { useAppContext } from "../../contexts/ContextProvider";
+import Errors from "../components/Errors";
+import Loading from "../components/Loading";
+import { useAppContext } from "../contexts/ContextProvider";
 
 export default function MetaProvider({ children }) {
   const {
