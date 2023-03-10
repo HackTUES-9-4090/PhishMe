@@ -44,7 +44,20 @@ export class AttackService {
   }
 
   async create(dto: AttackDto): Promise<AttackEntity> {
+    for (const target of dto.targets) {
+      const generatePhishingEmail = await this.generator.generatePhishingEmail({
+        attack: dto,
+        target,
+      });
+
+      this.logger.log(
+        `Generated email for ${target.name} with length ${generatePhishingEmail.message.length}`,
+      );
+
+      target.generatedEmailContent = generatePhishingEmail.message;
+    }
     const attack = this.attacksRepository.create(dto);
+
     return await this.attacksRepository.save(attack);
   }
 
