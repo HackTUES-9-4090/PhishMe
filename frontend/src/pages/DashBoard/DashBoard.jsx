@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { textColor } from "../../utils/Constants";
 import NavbarProvider from "../../hoc/NavbarProvider";
 import Text from "../../components/Text.component";
-import { useState } from "react";
-import { VerticalLeftOutlined } from "@ant-design/icons";
 import styles from "./styles/DashBoard.module.css";
+import request from '../../utils/requests';
 import AttackTable from "./components/AttackTable.component";
 
 function render(text, record) {
