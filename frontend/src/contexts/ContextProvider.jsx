@@ -8,12 +8,8 @@ function useAppContext() {
 
 function ContextProvider({ children }) {
   const [userState, setUserState] = useState({
-    accessToken: window.localStorage.getItem("accessToken").length
-      ? window.localStorage.getItem("accessToken")
-      : null,
-    refreshToken: window.localStorage.getItem("accessToken").length
-      ? window.localStorage.getItem("accessToken")
-      : null,
+    accessToken: window.localStorage.getItem("accessToken"),
+    refreshToken: window.localStorage.getItem("refreshToken"),
   });
 
   const [loadingState, setLoadingState] = useState({
