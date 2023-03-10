@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailModule } from '@/mail/mail.module';
+import { GeneratorModule } from '@/generator/generator.module';
 import { AttackService } from './attack.service';
 import { AttackController } from './attack.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AttackEntity, AttackTargetEntity } from './entities';
-import { GeneratorModule } from '@/generator/generator.module';
-import { MailModule } from '@/mail/mail.module';
 
 @Module({
   imports: [

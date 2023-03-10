@@ -4,7 +4,7 @@ import { AttackEntity } from './attack.entity';
 @Entity('attack_target')
 export class AttackTargetEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   name: string;
