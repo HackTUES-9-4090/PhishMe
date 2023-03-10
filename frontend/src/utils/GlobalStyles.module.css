@@ -1,20 +1,21 @@
-.Center 
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.Center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.centeredRow
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center; 
+.centeredRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.sideText
-{
-    margin-left: 10px
+.sideText {
+  margin-left: 10px;
 }
-  
+
+.AlignItems {
+  display: flex;
+  align-items: center;
+}
