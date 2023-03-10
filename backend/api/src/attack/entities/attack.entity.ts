@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 import { CommunicationType } from '@/attack/enums';
 import { AttackTargetEntity } from './attack-target.entity';
-import { Options } from '@nestjs/common';
 
 @Entity('attack')
 export class AttackEntity {
@@ -35,11 +34,6 @@ export class AttackEntity {
 
   @Column({ nullable: true })
   scrapeUrl?: string;
-
-  @Column({
-    nullable: true,
-  })
-  generatedEmailContent?: string;
 
   @OneToMany(() => AttackTargetEntity, (target) => target.attack, {
     eager: true,
