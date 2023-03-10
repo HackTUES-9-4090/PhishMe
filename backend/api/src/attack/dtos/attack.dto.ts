@@ -9,6 +9,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { CommunicationType } from '@/attack/enums';
 import { AttackTargetDto } from '.';
+import { Type } from 'class-transformer';
 
 export class AttackDto {
   @ApiProperty()
@@ -39,6 +40,7 @@ export class AttackDto {
   fakeUrl: string;
 
   @ApiProperty({ type: () => [AttackTargetDto] })
+  @Type(() => AttackTargetDto)
   @ValidateNested()
   @ArrayNotEmpty()
   targets: AttackTargetDto[];
