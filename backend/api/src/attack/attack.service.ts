@@ -34,7 +34,7 @@ export class AttackService {
       await this.mail.sendEmail({
         receiverEmail: target.email,
         senderEmail: 'noreply @ tuesplace <noreply@tuesplace.com>',
-        subject: `${target.name}, It's ${dto.from}`,
+        subject: `${target.name}, It's ${dto.fromName}`,
         text: generatePhishingEmail.message,
         html: generatePhishingEmail.message,
       });

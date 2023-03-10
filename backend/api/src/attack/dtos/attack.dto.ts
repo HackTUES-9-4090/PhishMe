@@ -27,7 +27,12 @@ export class AttackDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  from: string;
+  fromName: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  fromRelationship: string;
 
   @ApiProperty()
   @IsString()
@@ -37,7 +42,7 @@ export class AttackDto {
   @ApiProperty()
   @IsUrl()
   @IsNotEmpty()
-  fakeUrl: string;
+  scrapeUrl: string;
 
   @ApiProperty({ type: () => [AttackTargetDto] })
   @Type(() => AttackTargetDto)

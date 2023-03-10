@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CommunicationType } from '@/attack/enums';
 import { AttackTargetEntity } from './attack-target.entity';
 
 @Entity('attack')
@@ -15,6 +16,24 @@ export class AttackEntity {
 
   @Column()
   name: string;
+
+  @Column({
+    type: 'enum',
+    enum: CommunicationType,
+  })
+  communicationType: CommunicationType;
+
+  @Column()
+  fromName: string;
+
+  @Column()
+  fromRelationship: string;
+
+  @Column()
+  theme: string;
+
+  @Column()
+  scrapeUrl: string;
 
   @OneToMany(() => AttackTargetEntity, (target) => target.attack, {
     eager: true,

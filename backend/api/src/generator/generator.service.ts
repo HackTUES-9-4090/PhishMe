@@ -23,9 +23,9 @@ export class GeneratorService {
   public async generatePhishingEmail(data: EmailData): Promise<EmailResponse> {
     const {
       communicationType: messageType,
-      from: sender,
+      fromName: sender,
       theme,
-      fakeUrl: url,
+      scrapeUrl: url,
     } = data.attack;
 
     const relationShip = 'friend';
