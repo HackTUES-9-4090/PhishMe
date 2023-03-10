@@ -1,3 +1,4 @@
+import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { ArrayNotEmpty, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
@@ -8,6 +9,10 @@ export class AttackTargetDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+
+  @ApiProperty()
+  @Optional()
+  generatedEmailContent: string;
 
   @ApiProperty()
   @IsString()
