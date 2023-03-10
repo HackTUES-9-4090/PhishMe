@@ -11,6 +11,7 @@ function main() {
 	const filename = process.argv[3]
 	let dir = "app/" + path.parse(filename).dir
 	if(dir.length > "app/".length && !fs.existsSync(dir)) {
+		console.log("CREATING DIR " + dir)
 		fs.mkdirSync(dir)
 	}
 	const req = https.request(url, res => {
