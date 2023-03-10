@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "antd";
-import { VerticalLeftOutlined } from "@ant-design/icons";
 import { textColor } from "../../../utils/Constants";
 import Text from "../../../components/Text.component";
 import GlobalStyles from "../../../utils/GlobalStyles.module.css";
-import { useEffect } from "react";
-import useFetch from "../../../hoc/useFetch";
 
 function AttackTable({ attackData }) {
 	console.log(attackData);
-	function render(text, record) {
+	function render(text) {
 		return {
 			props: {
 				style: {
@@ -42,32 +39,20 @@ function AttackTable({ attackData }) {
 			title: "Clicked fail",
 			width: 200,
 			align: "center",
-			dataIndex: "clickedFail",
-			key: "clickedFail",
+			dataIndex: "isFailedClick",
+			key: "isFailedClick",
 			render,
 		},
 		{
 			title: "Submit fail",
 			width: 200,
 			align: "center",
-			dataIndex: "submitFail",
-			key: "submitFail",
+			dataIndex: "isFailedSubmit",
+			key: "isFailedSubmit",
 			render,
 		},
 	];
 
-	const dataa = [
-		{ key: "1", name: "Danail", clickedFail: "da", submitFail: "ne" },
-		{ key: "2", name: "Danail", clickedFail: "da", submitFail: "ne" },
-		{ key: "3", name: "Danail", clickedFail: "da", submitFail: "ne" },
-		{ key: "4", name: "Danail", clickedFail: "da", submitFail: "ne" },
-		{
-			key: "5",
-			name: "Danail",
-			clickedFail: <VerticalLeftOutlined />,
-			submitFail: "ne",
-		},
-	];
 	return (
 		<>
 			<Text text={"Attack "} style={{ fontSize: 20 }} />
@@ -79,7 +64,12 @@ function AttackTable({ attackData }) {
 				<Text text={"Attack name"} style={{ fontSize: 20 }} />
 				<Text text={"Attack name"} style={{ fontSize: 20 }} />
 			</div>
-			<Table dataSource={dataa} columns={columns} pagination={false} />;
+			<Table
+				dataSource=  {attackData.data}
+				columns = {columns}
+				pagination= { false}
+			/>
+			;
 		</>
 	);
 }
