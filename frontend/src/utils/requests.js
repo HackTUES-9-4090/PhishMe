@@ -10,6 +10,9 @@ export default async function request(method, request, body, config = null) {
       data: await instance[method](request, body, config),
     };
   } catch (err) {
-    return { isSuccessful: false, error: err };
+    return {
+      isSuccessful: false,
+      errors: err.config.data?.errors || [err.message],
+    };
   }
 }

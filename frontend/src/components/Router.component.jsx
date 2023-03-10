@@ -6,22 +6,34 @@ import DashBoard from "../pages/DashBoard/DashBoard";
 import About from "../pages/About/About";
 import { useAppContext } from "../contexts/ContextProvider";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
+import CreateAttack from "../pages/CreateAttack/CreateAttack";
 
 function Router() {
-  const { user } = useAppContext();
-  console.log(user);
-  const accessToken = "";
+  const {
+    user: {
+      userState: { accessToken },
+    },
+  } = useAppContext();
 
   return (
     <BrowserRouter>
       <Routes>
         {!accessToken ? (
           <>
-            <Route path="/sign-in" element={<AuthForm title={"Sign in"} />} />
-            <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />
+            <Route
+              path="/sign-in"
+              element={<AuthForm type="signin" title={"Sign in"} />}
+            />
+            <Route
+              path="/sign-up"
+              element={<AuthForm type="signin" title={"Sign up"} />}
+            />
           </>
         ) : null}
-        <Route path="/" element={!accessToken ? <DashBoard /> : <About />} />
+        {accessToken ? (
+          <Route path="/create-attack" element={<CreateAttack />} />
+        ) : null}
+        <Route path="/" element={accessToken ? <DashBoard /> : <About />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
