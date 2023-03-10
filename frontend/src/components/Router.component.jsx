@@ -20,8 +20,14 @@ function Router() {
       <Routes>
         {!accessToken ? (
           <>
-            <Route path="/sign-in" element={<AuthForm title={"Sign in"} />} />
-            <Route path="/sign-up" element={<AuthForm title={"Sign up"} />} />
+            <Route
+              path="/sign-in"
+              element={<AuthForm type="signin" title={"Sign in"} />}
+            />
+            <Route
+              path="/sign-up"
+              element={<AuthForm type="signin" title={"Sign up"} />}
+            />
           </>
         ) : null}
         {accessToken ? (
