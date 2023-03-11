@@ -1,8 +1,7 @@
 import { useAppContext } from "../contexts/ContextProvider";
 import request from "../utils/requests";
 
-function useFetch() 
-{
+function useFetch() {
 	const {
 		loading: { setLoadingState },
 		error: { setErrorState },
