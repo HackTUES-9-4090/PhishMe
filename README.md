@@ -26,3 +26,7 @@ PhishMe е система за генериране на фишинг атаки
 Код за дубикиране на страници за въвеждане на чувствителна информация. Базиран на **Python**, **bs4**, **Selenium** . Използват се като прикачен линк във флашфицирания имейл.
 
 ![alt text](https://raw.githubusercontent.com/HackTUES-9-4090/PhishMe/main/docs/figures/logic_fowchart.png)
+
+## Демо
+
+![alt text](https://raw.githubusercontent.com/HackTUES-9-4090/PhishMe/main/docs/figures/demo_email.png)
