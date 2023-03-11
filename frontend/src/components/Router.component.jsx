@@ -33,13 +33,13 @@ function Router() {
 						/>
 					</>
 				) : null}
-				{!accessToken ? (
+				{accessToken ? (
 					<Route path="/create-attack" element={<CreateAttack />} />
 				) : null}
 				<Route
 					path="/"
 					element={
-						!accessToken ? (
+						accessToken ? (
 							<DashBoard />
 						) : (
 							<AuthForm type="signin" title={"Sign in"} />

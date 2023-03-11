@@ -22,6 +22,8 @@ export default function DashBoard() {
 
 			result = await fetchData("get", "/attack");
 
+			if (!result) return; 
+
 			for (index in result) {
 				const { name, communicationType, fromName, createdAt, targets } = result[index];
 		
