@@ -6,6 +6,7 @@ import { AttackEntity } from './entities';
 import { GeneratorService } from '@/generator/generator.service';
 import { Logger } from '@nestjs/common';
 import { ScraperService } from '@/scraper/scraper.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AttackService {
@@ -19,12 +20,18 @@ export class AttackService {
   ) {}
 
   async create(dto: AttackDto): Promise<AttackEntity> {
-    let attack = this.attacksRepository.create(dto);
-    attack = await this.attacksRepository.save(attack);
+    const attackId = uuidv4();
 
-    await this.scraperService.callScraperService(dto.scrapeUrl, attack.id);
+    this.scraperService.callScraperService(dto.scrapeUrl, attackId);
 
     for (const target of dto.targets) {
+      const targetId = uuidv4();
+
+      dto = {
+        ...dto,
+        scrapeUrl: `http://localhost:3000/files/${attackId}/${attackId}.html?targetId=${targetId}`,
+      };
+
       const generatePhishingEmail = await this.generator.generatePhishingEmail({
         attack: dto,
         target,
@@ -35,7 +42,12 @@ export class AttackService {
       );
 
       target.generatedEmailContent = generatePhishingEmail.message;
+      target.id = targetId;
     }
+
+    let attack = this.attacksRepository.create({ ...dto, id: attackId });
+
+    attack = await this.attacksRepository.save(attack);
 
     return attack;
   }

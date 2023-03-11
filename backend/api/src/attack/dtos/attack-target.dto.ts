@@ -28,4 +28,6 @@ export class AttackTargetDto {
   @IsString({ each: true })
   @ArrayNotEmpty()
   toMessages: string[];
+
+  id: string;
 }

@@ -4,14 +4,14 @@ import {
   OneToMany,
   UpdateDateColumn,
   CreateDateColumn,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { CommunicationType } from '@/attack/enums';
 import { AttackTargetEntity } from './attack-target.entity';
 
 @Entity('attack')
 export class AttackEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
