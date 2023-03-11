@@ -60,7 +60,7 @@ export default function CreateAttack() {
 				<Card
 					title="Create Attack"
 					style={{
-						width: "clamp(200px, 50vw, 500px)",
+						width: "clamp(500px, 60vw, 800px)",
 						background: "none",
 						color: "white !important",
 					}}
@@ -96,7 +96,7 @@ export default function CreateAttack() {
 									name="name"
 									id="name"
 									type="text"
-									style={{ minWidth: "20px" }}
+									style={{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -120,7 +120,7 @@ export default function CreateAttack() {
 							>
 								<Select
 									id="communicationType"
-									style={{ width: 120 }}
+									style={{ minWidth: "32vw" }}
 									options={[
 										{ value: "formal", label: "Formal" },
 										{
@@ -157,7 +157,7 @@ export default function CreateAttack() {
 									name="theme"
 									id="theme"
 									type="text"
-									style={{ minWidth: "20px" }}
+									style={{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -182,7 +182,7 @@ export default function CreateAttack() {
 									name="scrapeUrl"
 									id="scrapeUrl"
 									type="text"
-									style={{ minWidth: "20px" }}
+									style={{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -207,7 +207,7 @@ export default function CreateAttack() {
 									name="sender"
 									id="sender"
 									type="text"
-									style={{ minWidth: "20px" }}
+									style={{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -232,7 +232,7 @@ export default function CreateAttack() {
 									name="relation"
 									id="relation"
 									type="text"
-									style={{ minWidth: "20px" }}
+									style={{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -268,7 +268,10 @@ export default function CreateAttack() {
 											</label>
 										}
 										name={`email:target:${index}`}
-										style={{ color: textColor }}
+										style={{
+											color: textColor,
+											minWidth: "32vw",
+										}}
 										rules={[
 											{
 												...validationRules,
@@ -280,6 +283,9 @@ export default function CreateAttack() {
 									>
 										<Input
 											type="email"
+											style={{
+												minWidth: "32vw",
+											}}
 											id={`email:target:${index}`}
 										/>
 									</Form.Item>
@@ -305,7 +311,7 @@ export default function CreateAttack() {
 											name={`name:target:${index}`}
 											id={`name:target:${index}`}
 											type="text"
-											style={{ minWidth: "20px" }}
+											style={{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 
@@ -331,7 +337,7 @@ export default function CreateAttack() {
 											name={`fromMessages:target:${index}`}
 											id={`fromMessages:target:${index}`}
 											type="text"
-											style={{ minWidth: "20px" }}
+											style={{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 									<Form.Item
@@ -356,7 +362,7 @@ export default function CreateAttack() {
 											name={`toMessages:target:${index}`}
 											id={`toMessages:target:${index}`}
 											type="text"
-											style={{ minWidth: "20px" }}
+											style={{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 								</div>

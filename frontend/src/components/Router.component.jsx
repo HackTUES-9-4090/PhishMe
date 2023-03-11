@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import AuthForm from "../components/AuthForm.component";
 import DashBoard from "../pages/DashBoard/DashBoard";
-import About from "../pages/About/About";
 import { useAppContext } from "../contexts/ContextProvider";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import CreateAttack from "../pages/CreateAttack/CreateAttack";
@@ -39,7 +38,13 @@ function Router() {
 				) : null}
 				<Route
 					path="/"
-					element={accessToken ? <DashBoard /> : <About />}
+					element={
+						!accessToken ? (
+							<DashBoard />
+						) : (
+							<AuthForm type="signin" title={"Sign in"} />
+						)
+					}
 				/>
 				<Route path="/*" element={<PageNotFound />} />
 			</Routes>
