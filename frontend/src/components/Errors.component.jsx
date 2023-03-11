@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Typography } from "antd";
-import Center from "./Center";
+import Center from "./Center.component";
 import "./styles/Errors.css";
 export default function Errors({ errors }) {
 	return (
