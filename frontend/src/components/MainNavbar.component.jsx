@@ -1,21 +1,18 @@
 import React from "react";
 import { Typography } from "antd";
-import Logo from "./Logo";
+import Logo from "./Logo.component";
 import { useAppContext } from "../contexts/ContextProvider";
-import Controls from "./Controls";
-import Navbar from "./Navbar";
+import Controls from "./Controls.component";
+import Navbar from "./Navbar.component";
 
-export default function MainNavbar() {
-	const {
-		user: {
-			userState: { accessToken },
-		},
-	} = useAppContext();
+export default function MainNavbar() 
+{
+	const { user: { userState: { accessToken } } } = useAppContext();
 
 	return (
 		<Navbar>
 			<div
-				style={{
+				style = {{
 					display: "flex",
 					flexDirection: "row",
 					height: "inherit",
@@ -24,21 +21,21 @@ export default function MainNavbar() {
 			>
 				<Logo />
 				<Typography
-					style={{
+					style = {{
 						alignSelf: "center",
 						display: "flex",
 						paddingLeft: "20px",
 					}}
 				>
 					<Typography.Text
-						style={{
+						style = {{
 							color: "white",
 							alignSelf: "center",
 							display: "flex",
 							fontSize: "1.2rem",
 						}}
 					>
-						Phishme
+						PhishMe
 					</Typography.Text>
 				</Typography>
 			</div>

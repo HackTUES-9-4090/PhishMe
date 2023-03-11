@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState }  from "react";
 import { Button, Card, Input, Form, Select, Typography } from "antd";
 import { basicColor, textColor } from "../../utils/Constants";
-import Center from "../../components/Center";
+import Center from "../../components/Center.component";
 import { useAppContext } from "../../contexts/ContextProvider";
 import NavbarProvider from "../../hoc/NavbarProvider";
-
 import styles from "../../utils/GlobalStyles.module.css";
-import "./CreateAttack.css";
-import { useState } from "react";
+import "./styles/CreateAttack.css";
 import { getTargets } from "../../utils/targets";
 import request from "../../utils/requests";
+import useFetch from "../../hoc/useFetch";
 
 function generateArray(count) {
 	const array = [];
@@ -27,14 +26,16 @@ export default function CreateAttack() {
 		error: { setErrorState },
 	} = useAppContext();
 
+	const { fetchData } = useFetch();
+
 	const [count, setCount] = useState(1);
 
 	const incrementAttackCount = () => {
 		setCount(count + 1);
 	};
 
-	async function handleFormSubmission(values) {
-		setLoadingState({ loading: true });
+	async function handleFormSubmission(values) 
+	{
 		const data = {
 			communicationType: values.communicationType,
 			name: values.name,
@@ -45,21 +46,15 @@ export default function CreateAttack() {
 			targets: getTargets(values),
 		};
 
-		const { isSuccessful, errors } = await request("post", "/attack", data);
-
-		if (!isSuccessful) {
-			setErrorState({ errors });
-		}
-
-		setLoadingState({ loading: false });
+		await fetchData('post', '/attack', data);
 	}
 
 	return (
 		<NavbarProvider>
 			<Center>
 				<Card
-					title="Create Attack"
-					style={{
+					title = "Create Attack"
+					style = {{
 						width: "clamp(500px, 60vw, 800px)",
 						background: "none",
 						color: "white !important",
@@ -67,25 +62,25 @@ export default function CreateAttack() {
 				>
 					<Center>
 						<Form
-							layout="vertical"
-							labelCol={{ span: 10 }}
-							wrapperCol={{ span: 20 }}
-							style={{ maxWidth: 500 }}
-							onFinish={handleFormSubmission}
-							initialValues={{ remember: true }}
-							autoComplete="off"
+							layout = "vertical"
+							labelCol = {{ span: 10 }}
+							wrapperCol = {{ span: 20 }}
+							style = {{ maxWidth: 500 }}
+							onFinish = {handleFormSubmission}
+							initialValues = {{ remember: true }}
+							autoComplete = "off"
 						>
 							<Form.Item
-								label={
+								label = {
 									<label
-										htmlFor="name"
-										style={{ color: textColor }}
+										htmlFor = "name"
+										style = {{ color: textColor }}
 									>
 										Name
 									</label>
 								}
-								name="name"
-								rules={[
+								name = "name"
+								rules = {[
 									{
 										...validationRules,
 										message: "Please provide a name!",
@@ -93,24 +88,24 @@ export default function CreateAttack() {
 								]}
 							>
 								<Input
-									name="name"
-									id="name"
-									type="text"
-									style={{ minWidth: "32vw" }}
+									name = "name"
+									id = "name"
+									type = "text"
+									style = {{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
 							<Form.Item
-								label={
+								label = {
 									<label
-										htmlFor="communicationType"
-										style={{ color: textColor }}
+										htmlFor = "communicationType"
+										style = {{ color: textColor }}
 									>
 										Type
 									</label>
 								}
-								name="communicationType"
-								rules={[
+								name = "communicationType"
+								rules = {[
 									{
 										...validationRules,
 										message:
@@ -119,9 +114,9 @@ export default function CreateAttack() {
 								]}
 							>
 								<Select
-									id="communicationType"
-									style={{ minWidth: "32vw" }}
-									options={[
+									id = "communicationType"
+									style = {{ minWidth: "32vw" }}
+									options = {[
 										{ value: "formal", label: "Formal" },
 										{
 											value: "informal",
@@ -137,7 +132,7 @@ export default function CreateAttack() {
 							</Form.Item>
 
 							<Form.Item
-								label={
+								label = {
 									<label
 										htmlFor="theme"
 										style={{ color: textColor }}
@@ -145,8 +140,8 @@ export default function CreateAttack() {
 										Theme
 									</label>
 								}
-								name="theme"
-								rules={[
+								name = "theme"
+								rules = {[
 									{
 										...validationRules,
 										message: "Please provide a theme",
@@ -154,24 +149,24 @@ export default function CreateAttack() {
 								]}
 							>
 								<Input
-									name="theme"
-									id="theme"
-									type="text"
-									style={{ minWidth: "32vw" }}
+									name = "theme"
+									id = "theme"
+									type = "text"
+									style = {{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
 							<Form.Item
-								label={
+								label = {
 									<label
-										htmlFor="scrapeUrl"
-										style={{ color: textColor }}
+										htmlFor = "scrapeUrl"
+										style = {{ color: textColor }}
 									>
 										Scrape URL
 									</label>
 								}
-								name="scrapeUrl"
-								rules={[
+								name = "scrapeUrl"
+								rules = {[
 									{
 										...validationRules,
 										message: "Please provide a scrape url",
@@ -179,24 +174,24 @@ export default function CreateAttack() {
 								]}
 							>
 								<Input
-									name="scrapeUrl"
-									id="scrapeUrl"
-									type="text"
-									style={{ minWidth: "32vw" }}
+									name = "scrapeUrl"
+									id = "scrapeUrl"
+									type = "text"
+									style = {{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
 							<Form.Item
-								label={
+								label = {
 									<label
-										htmlFor="sender"
-										style={{ color: textColor }}
+										htmlFor = "sender"
+										style = {{ color: textColor }}
 									>
 										Sender
 									</label>
 								}
-								name="sender"
-								rules={[
+								name = "sender"
+								rules = {[
 									{
 										...validationRules,
 										message: "Please provide a sender!",
@@ -204,24 +199,24 @@ export default function CreateAttack() {
 								]}
 							>
 								<Input
-									name="sender"
-									id="sender"
-									type="text"
-									style={{ minWidth: "32vw" }}
+									name = "sender"
+									id = "sender"
+									type = "text"
+									style = {{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
 							<Form.Item
-								label={
+								label = {
 									<label
-										htmlFor="relation"
-										style={{ color: textColor }}
+										htmlFor = "relation"
+										style = {{ color: textColor }}
 									>
 										Relation
 									</label>
 								}
-								name="relation"
-								rules={[
+								name = "relation"
+								rules = {[
 									{
 										...validationRules,
 										message: "Please provide a relation!",
@@ -229,10 +224,10 @@ export default function CreateAttack() {
 								]}
 							>
 								<Input
-									name="relation"
-									id="relation"
-									type="text"
-									style={{ minWidth: "32vw" }}
+									name = "relation"
+									id = "relation"
+									type = "text"
+									style = {{ minWidth: "32vw" }}
 								/>
 							</Form.Item>
 
@@ -249,8 +244,8 @@ export default function CreateAttack() {
 								<div key={index}>
 									<Typography>
 										<Typography.Title
-											level={5}
-											style={{
+											level = {5}
+											style = {{
 												color: "white",
 												marginTop: 20,
 											}}
@@ -259,20 +254,20 @@ export default function CreateAttack() {
 										</Typography.Title>
 									</Typography>
 									<Form.Item
-										label={
+										label = {
 											<label
-												htmlFor={`email:target:${index}`}
-												style={{ color: textColor }}
+												htmlFor = {`email:target:${index}`}
+												style = {{ color: textColor }}
 											>
 												Email
 											</label>
 										}
-										name={`email:target:${index}`}
-										style={{
+										name = {`email:target:${index}`}
+										style = {{
 											color: textColor,
 											minWidth: "32vw",
 										}}
-										rules={[
+										rules = {[
 											{
 												...validationRules,
 												message:
@@ -282,24 +277,24 @@ export default function CreateAttack() {
 										]}
 									>
 										<Input
-											type="email"
-											style={{
+											type = "email"
+											style = {{
 												minWidth: "32vw",
 											}}
 											id={`email:target:${index}`}
 										/>
 									</Form.Item>
 									<Form.Item
-										label={
+										label = {
 											<label
-												htmlFor={`name:target:${index}`}
-												style={{ color: textColor }}
+												htmlFor = {`name:target:${index}`}
+												style = {{ color: textColor }}
 											>
 												Target Name
 											</label>
 										}
-										name={`name:target:${index}`}
-										rules={[
+										name = {`name:target:${index}`}
+										rules = {[
 											{
 												...validationRules,
 												message:
@@ -308,24 +303,24 @@ export default function CreateAttack() {
 										]}
 									>
 										<Input
-											name={`name:target:${index}`}
-											id={`name:target:${index}`}
-											type="text"
-											style={{ minWidth: "32vw" }}
+											name = {`name:target:${index}`}
+											id = {`name:target:${index}`}
+											type = "text"
+											style = {{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 
 									<Form.Item
-										label={
+										label = {
 											<label
-												htmlFor={`fromMessages:target:${index}`}
-												style={{ color: textColor }}
+												htmlFor = {`fromMessages:target:${index}`}
+												style = {{ color: textColor }}
 											>
 												From Messages
 											</label>
 										}
-										name={`fromMessages:target:${index}`}
-										rules={[
+										name = {`fromMessages:target:${index}`}
+										rules = {[
 											{
 												...validationRules,
 												message:
@@ -334,23 +329,23 @@ export default function CreateAttack() {
 										]}
 									>
 										<Input.TextArea
-											name={`fromMessages:target:${index}`}
-											id={`fromMessages:target:${index}`}
-											type="text"
-											style={{ minWidth: "32vw" }}
+											name = {`fromMessages:target:${index}`}
+											id = {`fromMessages:target:${index}`}
+											type = "text"
+											style = {{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 									<Form.Item
-										label={
+										label = {
 											<label
-												htmlFor={`toMessages:target:${index}`}
-												style={{ color: textColor }}
+												htmlFor = {`toMessages:target:${index}`}
+												style = {{ color: textColor }}
 											>
 												Outward Messages
 											</label>
 										}
-										name={`toMessages:target:${index}`}
-										rules={[
+										name = {`toMessages:target:${index}`}
+										rules = {[
 											{
 												...validationRules,
 												message:
@@ -359,10 +354,10 @@ export default function CreateAttack() {
 										]}
 									>
 										<Input.TextArea
-											name={`toMessages:target:${index}`}
-											id={`toMessages:target:${index}`}
-											type="text"
-											style={{ minWidth: "32vw" }}
+											name = {`toMessages:target:${index}`}
+											id = {`toMessages:target:${index}`}
+											type = "text"
+											style = {{ minWidth: "32vw" }}
 										/>
 									</Form.Item>
 								</div>
@@ -370,8 +365,8 @@ export default function CreateAttack() {
 
 							<Center>
 								<Button
-									onClick={incrementAttackCount}
-									ghost={true}
+									onClick = {incrementAttackCount}
+									ghost = {true}
 								>
 									Add Target
 								</Button>
@@ -379,10 +374,10 @@ export default function CreateAttack() {
 							<Center>
 								<Form.Item>
 									<Button
-										type="primary"
-										htmlType="submit"
-										className={styles.AlignItems}
-										style={{
+										type = "primary"
+										htmlType = "submit"
+										className = {styles.AlignItems}
+										style = {{
 											marginTop: 30,
 											padding: 20,
 											backgroundColor: basicColor,
