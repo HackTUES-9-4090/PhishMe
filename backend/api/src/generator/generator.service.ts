@@ -48,9 +48,11 @@ export class GeneratorService {
       url,
     );
 
-    const res = await this.generateSolicitationText(prompt);
+    let res: string = await this.generateSolicitationText(prompt);
 
-    // this.logger.log('Generated phishing email: ' + res);
+    if (res.startsWith('.')) {
+      res = res.substring(1);
+    }
 
     return {
       message: res,

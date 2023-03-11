@@ -1,48 +1,33 @@
-import React from "react";
-import { Button, Form, Input, Typography } from "antd";
-import NavbarProvider from "../hoc/NavbarProvider";
-import { basicColor, textColor } from "../utils/Constants";
-import Center from "./Center";
-import styles from "../utils/GlobalStyles.module.css";
-import Loading from "./Loading";
-import request from "../utils/requests";
-import { useAppContext } from "../contexts/ContextProvider";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input, Typography } from 'antd';
+import { basicColor, textColor } from '../utils/Constants';
+import { useAppContext } from '../contexts/ContextProvider';
+import NavbarProvider from '../hoc/NavbarProvider';
+import Center from './Center.component';
+import styles from '../utils/GlobalStyles.module.css';
+import Loading from './Loading.component';
+import useFetch from '../hoc/useFetch';
 
 const validationsRules = { required: true, warningOnly: true };
 const inputWidth = 400;
 
-function AuthForm({ title, type }) {
-	const {
-		user: { setUserState },
-		error: { setErrorState },
-		loading: {
-			loadingState: { loading },
-			setLoadingState,
-		},
-	} = useAppContext();
-
+function AuthForm({ title, type }) 
+{
 	const navigate = useNavigate();
+	const { user: { setUserState }, loading: { loadingState } } = useAppContext(); 
+	const { fetchData } = useFetch(); 
 
-	async function handleFormSubmission({ email, password }) {
-		setLoadingState({ loading: true });
-		setErrorState({ errors: [] });
-		const { isSuccessful, errors, data } = await request(
-			"post",
-			`/auth/${type}`,
-			{ email, password }
-		);
-
-		if (isSuccessful) {
-			setUserState(data);
-			window.localStorage.setItem("accessToken", data.accessToken);
-			window.localStorage.setItem("refreshToken", data.refreshToken);
-			navigate("/");
-		} else {
-			setErrorState({ errors });
-		}
-
-		setLoadingState({ loading: false });
+	async function handleFormSubmission({ email, password }) 
+	{
+		const result = await fetchData("post", `/auth/${type}`, { email, password });
+		console.log(result.accessToken);
+		if (!result) return; 
+		
+		setUserState(result);
+		window.localStorage.setItem("accessToken", result.accessToken);
+		window.localStorage.setItem("refreshToken", result.refreshToken);
+		navigate('/');
 	}
 
 	const form = (
@@ -51,31 +36,31 @@ function AuthForm({ title, type }) {
 				<div>
 					<Typography>
 						<Typography.Title
-							style={{ color: textColor }}
-							level={1}
+							style = {{ color: textColor }}
+							level = {1}
 						>
 							{title}
 						</Typography.Title>
 					</Typography>
 
 					<Form
-						layout="vertical"
-						labelCol={{ span: 10 }}
-						wrapperCol={{ span: 20 }}
-						style={{ maxWidth: 500 }}
-						initialValues={{ remember: true }}
-						onFinish={handleFormSubmission}
-						autoComplete="off"
+						layout = "vertical"
+						labelCol = {{ span: 10 }}
+						wrapperCol = {{ span: 20 }}
+						style = {{ maxWidth: 500 }}
+						initialValues = {{ remember: true }}
+						onFinish = {handleFormSubmission}
+						autoComplete = "off"
 					>
 						<Form.Item
-							label={
-								<label style={{ color: textColor }}>
+							label = {
+								<label style = {{ color: textColor }}>
 									Email
 								</label>
 							}
-							name="email"
-							style={{ color: textColor }}
-							rules={[
+							name = "email"
+							style = {{ color: textColor }}
+							rules = {[
 								{
 									...validationsRules,
 									message: "Please provide an email!",
@@ -84,40 +69,40 @@ function AuthForm({ title, type }) {
 							]}
 						>
 							<Input
-								type="email"
-								style={{ minWidth: inputWidth }}
+								type = "email"
+								style = {{ minWidth: inputWidth }}
 							/>
 						</Form.Item>
 
 						<Form.Item
-							label={
-								<label style={{ color: textColor }}>
+							label = {
+								<label style = {{ color: textColor }}>
 									Password
 								</label>
 							}
-							name="password"
-							rules={[
+							name = 'password'
+							rules = {[
 								{
 									...validationsRules,
-									message: "Please provide a password!",
+									message: 'Please provide a password!',
 								},
 							]}
 						>
-							<Input.Password style={{ minWidth: inputWidth }} />
+							<Input.Password style = {{ minWidth: inputWidth }} />
 						</Form.Item>
 
-						<Form.Item className={styles.Center}>
+						<Form.Item className = {styles.Center}>
 							<Button
-								type="primary"
-								htmlType="submit"
-								className={styles.Center}
-								style={{
+								type = 'primary'
+								htmlType = 'submit'
+								className = {styles.Center}
+								style = {{
 									marginTop: 10,
 									padding: 20,
 									backgroundColor: basicColor,
 								}}
 							>
-								{title === "Sign up" ? "Sign up" : "Sign in"}
+								{title === 'Sign up' ? 'Sign up' : 'Sign in'}
 							</Button>
 						</Form.Item>
 					</Form>
@@ -126,7 +111,7 @@ function AuthForm({ title, type }) {
 		</NavbarProvider>
 	);
 
-	return <>{loading ? <Loading /> : form}</>;
+	return <>{loadingState.loading ? <Loading /> : form}</>;
 }
 
 export default AuthForm;

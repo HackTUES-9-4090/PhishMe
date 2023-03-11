@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "antd";
-import Center from "../../components/Center";
 import { textColor } from "../../utils/Constants";
+import Center from "../../components/Center.component";
 import NavbarProvider from "../../hoc/NavbarProvider";
 
 export default function PageNotFound() {
@@ -9,7 +9,7 @@ export default function PageNotFound() {
 		<NavbarProvider>
 			<Center>
 				<Typography>
-					<Typography.Title style={{ color: textColor }} level={1}>
+					<Typography.Title style = {{ color: textColor }} level = {1}>
 						404 Found
 					</Typography.Title>
 				</Typography>
