@@ -13,7 +13,7 @@ if(len(argv) < 3):
     print("Usage ", argv[0], " <URL> <FILENAME>")
     exit()
 
-ROOT_DIR_NAME = '../api/static-files'
+ROOT_DIR_NAME = '../staticfiles'
 URL = argv[1]
 PARSED_URL = urlparse(URL)
 FILENAME = argv[2]
