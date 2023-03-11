@@ -13,7 +13,7 @@ if(len(argv) < 3):
     print("Usage ", argv[0], " <URL> <FILENAME>")
     exit()
 
-ROOT_DIR_NAME = 'app'
+ROOT_DIR_NAME = '../api/static-files'
 URL = argv[1]
 PARSED_URL = urlparse(URL)
 FILENAME = argv[2]
@@ -38,6 +38,7 @@ def fetch_index_and_refactor():
     replaced_source = re.sub(r'href="/', 'href="', driver.page_source)
     replaced_source = re.sub(r'src="/', 'src="', replaced_source)
     replaced_source = re.sub(r'integrity=".*"', '', replaced_source)
+    replaced_source = re.sub(r'<form ', '<form method="POST" action="/" ', replaced_source)
     #Matches all characters in a group until meeting a (? and more characters until a ") or a " 
     replaced_source = re.sub(r'href="(.*?)(?:\?.*?"|")', r'href="\1"', replaced_source)
     with codecs.open(ROOT_DIR_NAME + '/' + FILENAME + '/' + FILENAME + '.html', 'w+', 'utf-8') as f:
