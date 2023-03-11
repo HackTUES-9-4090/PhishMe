@@ -9,6 +9,7 @@ function useFetch() {
 
 	async function fetchData(method, url, body) {
 		setLoadingState({ loading: true });
+		setErrorState({ errors: [] });
 
 		const { isSuccessful, errors, data } = await request(method, url, body);
 
