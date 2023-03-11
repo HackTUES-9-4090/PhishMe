@@ -39,9 +39,9 @@ export default function CreateAttack() {
 		const data = {
 			communicationType: values.communicationType,
 			name: values.name,
-			relation: values.relation,
+			fromRelationship: values.relation,
 			scrapeUrl: values.scrapeUrl,
-			sender: values.sender,
+			fromName: values.sender,
 			theme: values.theme,
 			targets: getTargets(values),
 		};
@@ -119,8 +119,12 @@ export default function CreateAttack() {
 									options = {[
 										{ value: "formal", label: "Formal" },
 										{
-											value: "informal",
-											label: "Informal",
+											value: "casual",
+											label: "Casual",
+										},
+										{
+											value: "friendly",
+											label: "Friendly",
 										},
 										{ value: "direct", label: "Direct" },
 										{

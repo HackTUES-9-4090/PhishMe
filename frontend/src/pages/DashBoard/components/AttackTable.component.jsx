@@ -1,13 +1,19 @@
 import React from "react";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { textColor } from "../../../utils/Constants";
 import Text from "../../../components/Text.component";
 import GlobalStyles from "../../../utils/GlobalStyles.module.css";
+import useFetch from "../../../hoc/useFetch";
 
-function AttackTable({ attackData }) 
-{
+function AttackTable({ attackData }) {
 	console.log(attackData);
-	const basedColumn = { width: 250, align: 'center', render };
+	const basedColumn = { width: 250, align: "center", render };
+
+	const { fetchData } = useFetch();
+
+	async function onCommenceAttack(attackId) {
+		await fetchData("post", `/mail/send/${attackId}`);
+	}
 
 	function render(text) {
 		return {
@@ -21,19 +27,46 @@ function AttackTable({ attackData })
 			children: <div>{text}</div>,
 		};
 	}
-	const columns = 
-	[
+	const columns = [
 		{ title: "Name", dataIndex: "name", key: "name", ...basedColumn },
 		{ title: "Email", dataIndex: "email", key: "email", ...basedColumn },
-		{ title: "Clicked fail", dataIndex: "isFailedClick", key: "isFailedClick", ...basedColumn },
-		{ title: "Submit fail", dataIndex: "isFailedSubmit", key: "isFailedSubmit", ...basedColumn },
+		{
+			title: "Clicked fail",
+			dataIndex: "isFailedClick",
+			key: "isFailedClick",
+			...basedColumn,
+		},
+		{
+			title: "Submit fail",
+			dataIndex: "isFailedSubmit",
+			key: "isFailedSubmit",
+			...basedColumn,
+		},
 	];
 
 	if (!attackData) return null;
 
 	return (
 		<>
-			<Text text={attackData.name} style={{ fontSize: 20 }} />
+			<div
+				className="attackTitle"
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "space-between",
+					alignItems: "center",
+					paddingRight: 50,
+				}}
+			>
+				<Text text={attackData.name} style={{ fontSize: 20 }} />
+				<Button
+					onClick={() => onCommenceAttack(attackData.id)}
+					ghost={true}
+				>
+					Commence Attack
+				</Button>
+			</div>
+
 			<div
 				className={GlobalStyles.centeredRow}
 				style={{ justifyContent: "space-between" }}
@@ -63,10 +96,11 @@ function AttackTable({ attackData })
 				dataSource={attackData.data}
 				columns={columns}
 				pagination={false}
-				expandable=
-				{{
+				expandable={{
 					expandedRowRender: (record) => (
-						<p style={{ margin: 0 }}>{record.generatedEmailContent}</p>
+						<p style={{ margin: 0 }}>
+							{record.generatedEmailContent}
+						</p>
 					),
 					rowExpandable: (record) => record.generatedEmailContent,
 				}}
