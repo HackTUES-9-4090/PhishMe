@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import { Button, Card, Form, Typography } from "antd";
 import { basicColor } from "../../utils/Constants";
 import Center from "../../components/Center.component";
@@ -7,10 +7,9 @@ import styles from "../../utils/GlobalStyles.module.css";
 import "./styles/CreateAttack.css";
 import { getTargets } from "../../utils/targets";
 import useFetch from "../../hoc/useFetch";
-import FormItem from "../../components/FormItem.component";
+import FormItem from "../../components/FormItem.component.jsx";
 
-function generateArray(count) 
-{
+function generateArray(count) {
 	const array = [];
 	for (let i = 0; i < count; i++) {
 		array.push("");
@@ -18,9 +17,7 @@ function generateArray(count)
 	return array;
 }
 
-export default function CreateAttack() 
-{
-
+export default function CreateAttack() {
 	const { fetchData } = useFetch();
 
 	const [count, setCount] = useState(1);
@@ -29,8 +26,7 @@ export default function CreateAttack()
 		setCount(count + 1);
 	};
 
-	async function handleFormSubmission(values) 
-	{
+	async function handleFormSubmission(values) {
 		const data = {
 			communicationType: values.communicationType,
 			name: values.name,
@@ -41,7 +37,7 @@ export default function CreateAttack()
 			targets: getTargets(values),
 		};
 
-		await fetchData('post', '/attack', data);
+		await fetchData("post", "/attack", data);
 	}
 
 	return (
@@ -57,26 +53,26 @@ export default function CreateAttack()
 				>
 					<Center>
 						<Form
-							layout = "vertical"
-							labelCol = {{ span: 10 }}
-							wrapperCol = {{ span: 20 }}
-							style = {{ maxWidth: 500 }}
-							onFinish = {handleFormSubmission}
-							initialValues = {{ remember: true }}
-							autoComplete = "off"
+							layout="vertical"
+							labelCol={{ span: 10 }}
+							wrapperCol={{ span: 20 }}
+							style={{ maxWidth: 500 }}
+							onFinish={handleFormSubmission}
+							initialValues={{ remember: true }}
+							autoComplete="off"
 						>
 							<FormItem
-								name = {"name"}
-								label = {"Name"}
-								message = {"Please provide a name!"}
+								name={"name"}
+								label={"Name"}
+								message={"Please provide a name!"}
 							/>
 
 							<FormItem
-								name = {"communicationType"}
-								label = {"Type"}
-								message = {"Please provide a communication type!"}
-								select = {true}
-								options = {[
+								name={"communicationType"}
+								label={"Type"}
+								message={"Please provide a communication type!"}
+								select={true}
+								options={[
 									{ value: "formal", label: "Formal" },
 									{ value: "casual", label: "Casual" },
 									{ value: "friendly", label: "Friendly" },
@@ -86,27 +82,27 @@ export default function CreateAttack()
 							/>
 
 							<FormItem
-								name = {'theme'}
-								label = {'Theme'}
-								message = {'Please provide a theme!'}
+								name={"theme"}
+								label={"Theme"}
+								message={"Please provide a theme!"}
 							/>
 
 							<FormItem
-								name = {"scrapeUrl"}
-								label = {"Scrape URL"}
-								message = {"Please provide a scrape url"}
+								name={"scrapeUrl"}
+								label={"Scrape URL"}
+								message={"Please provide a scrape url"}
 							/>
 
 							<FormItem
-								name = {"sender"}
-								label = {"Sender"}
-								message = {"Please provide a sender!"}
+								name={"sender"}
+								label={"Sender"}
+								message={"Please provide a sender!"}
 							/>
 
 							<FormItem
-								name = {"relation"}
-								label = {"Relation"}
-								message = {"Please provide a relation!"}
+								name={"relation"}
+								label={"Relation"}
+								message={"Please provide a relation!"}
 							/>
 
 							<Typography>
@@ -122,8 +118,8 @@ export default function CreateAttack()
 								<div key={index}>
 									<Typography>
 										<Typography.Title
-											level = {5}
-											style = {{
+											level={5}
+											style={{
 												color: "white",
 												marginTop: 20,
 											}}
@@ -133,31 +129,32 @@ export default function CreateAttack()
 									</Typography>
 
 									<FormItem
-										name = {`email:target:${index}`}
-										label = {"Email"}
-										message = {"Please provide an email!"}
-										validations = {{ type: "email" }}
-										type = "email"
+										name={`email:target:${index}`}
+										label={"Email"}
+										message={"Please provide an email!"}
+										validations={{ type: "email" }}
+										type="email"
 									/>
 
 									<FormItem
-										name = {`name:target:${index}`}
-										label = {"Target name"}
-										message = {"Please provide a name for the target!"}
+										name={`name:target:${index}`}
+										label={"Target name"}
+										message={
+											"Please provide a name for the target!"
+										}
 									/>
 
 									<FormItem
-										name = {`fromMessages:target:${index}`}
-										label = {"From messages"}
-										message = {"Please provide some messages"}
+										name={`fromMessages:target:${index}`}
+										label={"From messages"}
+										message={"Please provide some messages"}
 									/>
 
 									<FormItem
-										name = {`toMessages:target:${index}`}
-										label = {'Outward messages'}
-										message = { "Please provide some messages" }
+										name={`toMessages:target:${index}`}
+										label={"Outward messages"}
+										message={"Please provide some messages"}
 									/>
-							
 								</div>
 							))}
 
