@@ -5,6 +5,7 @@ import { AttackDto } from './dtos';
 import { AttackEntity } from './entities';
 import { GeneratorService } from '@/generator/generator.service';
 import { Logger } from '@nestjs/common';
+import { ScraperService } from '@/scraper/scraper.service';
 
 @Injectable()
 export class AttackService {
@@ -14,9 +15,15 @@ export class AttackService {
     @InjectRepository(AttackEntity)
     private readonly attacksRepository: Repository<AttackEntity>,
     private readonly generator: GeneratorService,
+    private readonly scraperService: ScraperService,
   ) {}
 
   async create(dto: AttackDto): Promise<AttackEntity> {
+    let attack = this.attacksRepository.create(dto);
+    attack = await this.attacksRepository.save(attack);
+
+    await this.scraperService.callScraperService(dto.scrapeUrl, attack.id);
+
     for (const target of dto.targets) {
       const generatePhishingEmail = await this.generator.generatePhishingEmail({
         attack: dto,
@@ -29,9 +36,8 @@ export class AttackService {
 
       target.generatedEmailContent = generatePhishingEmail.message;
     }
-    const attack = this.attacksRepository.create(dto);
 
-    return await this.attacksRepository.save(attack);
+    return attack;
   }
 
   async findAll(): Promise<AttackEntity[]> {

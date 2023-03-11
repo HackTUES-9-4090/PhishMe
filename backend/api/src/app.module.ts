@@ -10,6 +10,7 @@ import { typeOrmAsyncConfig } from '@/config/typeorm.config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { UsersModule } from './users/users.module';
+import { ScraperModule } from './scraper/scraper.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { UsersModule } from './users/users.module';
       },
     }),
     UsersModule,
+    ScraperModule,
   ],
   controllers: [],
   providers: [],
