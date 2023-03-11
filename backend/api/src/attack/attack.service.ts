@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AttackDto } from './dtos';
-import { AttackEntity } from './entities';
+import { AttackEntity, AttackTargetEntity } from './entities';
 import { GeneratorService } from '@/generator/generator.service';
 import { Logger } from '@nestjs/common';
 import { ScraperService } from '@/scraper/scraper.service';
@@ -15,9 +15,17 @@ export class AttackService {
   constructor(
     @InjectRepository(AttackEntity)
     private readonly attacksRepository: Repository<AttackEntity>,
+    @InjectRepository(AttackTargetEntity)
+    private readonly attackTargetsRepository: Repository<AttackTargetEntity>,
     private readonly generator: GeneratorService,
     private readonly scraperService: ScraperService,
   ) {}
+
+  async updateTarget(id: string): Promise<void> {
+    await this.attackTargetsRepository.update(id, {
+      isFailedClick: true,
+    });
+  }
 
   async create(dto: AttackDto): Promise<AttackEntity> {
     const attackId = uuidv4();

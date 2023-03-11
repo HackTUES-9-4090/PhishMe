@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  RequestMethod,
+  MiddlewareConsumer,
+} from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { AttackModule } from './attack/attack.module';
 import { MailModule } from './mail/mail.module';
@@ -11,6 +16,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { UsersModule } from './users/users.module';
 import { ScraperModule } from './scraper/scraper.module';
+import { StaticfilesMiddleware } from './common/middleware';
 
 @Module({
   imports: [
@@ -48,4 +54,11 @@ import { ScraperModule } from './scraper/scraper.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(StaticfilesMiddleware).forRoutes({
+      path: '/**',
+      method: RequestMethod.ALL,
+    });
+  }
+}
